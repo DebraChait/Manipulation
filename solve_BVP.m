@@ -1,4 +1,4 @@
-function output_BVP = solve_BVP(x0,p0,xf,tf,params)
+function output_BVP = solve_BVP(x0,p0,xf,tf,params,m)
 % Inputs x0 = initial cond for x, p0 = guess for p(0), xf = desired value
 %   of x at time tf
 % Solves BVP by using IVP and reducing error between guess output and
@@ -20,7 +20,7 @@ while i <= params.nmax
     % Iterate i
     i = i+1;
     % Solve IVP
-    output_IVP = solve_IVP(x0,p0,tf,params);
+    output_IVP = solve_IVP(x0,p0,tf,params,m);
     % Compute error between current and desired value of x(tf)
     output_IVP.eta = ...
         [output_IVP.x(end,1)-xf(1); % For component x1
@@ -60,7 +60,7 @@ while i <= params.nmax
     % p0 = p0 + dp0';
     
     % Use line search to find step size that ensures error decreases
-    step = line_search(x0,p0,xf,dp0,tf,output_IVP.err,params);
+    step = line_search(x0,p0,xf,dp0,tf,output_IVP.err,params,m);
     
     % Update p0 with line search
     if ~isempty(step)
@@ -77,7 +77,7 @@ end
                   
 end
 
-function step = line_search(x0,p0,xf,dp0,tf,err,params)
+function step = line_search(x0,p0,xf,dp0,tf,err,params,m)
 
 % This function uses a line search to ensure that the error decreases when
 % updating p0
@@ -104,7 +104,7 @@ while newerr > (1-params.decrease_param)*err
     newp0 = p0+step*dp0';
     
     % Compute error after step
-    output_IVP = solve_IVP(x0,newp0,tf,params);
+    output_IVP = solve_IVP(x0,newp0,tf,params,m);
     
     % Store error between current and desired value of x(tf)
     neweta = [output_IVP.x(end,1)-xf(1)... 
