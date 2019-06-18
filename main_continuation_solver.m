@@ -48,6 +48,16 @@ for m = 1:200
         % disp('after BVP')
         % disp(XF)
         
+        % Test for sufficient straightness
+        endx1 = XF(end,1);
+        endx2 = XF(end,2);
+        % fprintf('endx1 = %.3d, endx2 = %.3d \n', endx1,endx2)
+        slopenow = endx2/endx1;
+        % fprintf('slope is %.3d at iteration %i \n',slopenow,m)
+        if abs(slopenow)<.03
+            break
+        end
+        
 end 
 
 end
