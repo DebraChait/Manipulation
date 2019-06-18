@@ -11,7 +11,7 @@ tf = 1;
 params = parameters;
 
 % Solve IVP
-output = solve_IVP(x0,p0,tf,params);
+output = solve_IVP(x0,p0,tf,params,m);
 
 % Make plot of x1 vs x2
 comet(output.x(:,1),output.x(:,2))
