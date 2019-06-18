@@ -21,12 +21,13 @@ J0 = zeros(3,3); % 3x3 matrix of zeros
 Y0 = [x0 p0 reshape(M0',1,9) reshape(J0',1,9)];
 
 % Solve ODEs
-[t,sol,tconj] = ode45(@(t,Y) diff_eqns(t,Y,params), [0 tf],... 
+[t,sol,tconj] = ode45(@(t,Y) diff_eqns(t,Y,params), [linspace(0,1,201)],... 
                         Y0,params.ode_options);
                         % @ tells Matlab which parameters to use and which
                         % to ignore. Matlab really only wants t,Y
 % ode45 input(system of diff eqs to solve, [start end], initial cond, 
 % extra input for error tolerance and to get conjugate points)
+% linspace discretizes rod length 1 into 201 points from 0 to 1
 % ode45 outputs t = evaluation points, sol = solutions corresponding to
 % evaluation points specified by t, tconj = times of conjugate points
                         
