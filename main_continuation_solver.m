@@ -13,16 +13,16 @@ params = parameters;
 p0 = [0 0 1];
 
 % Solve IVP to find stable shape
-output_IVP = solve_IVP(x0,p0,tf,params);
+output_IVP = solve_IVP(x0,p0,tf,params,0);
 % disp('solved IVP');
 
-% Set up for continuation problem
+% Set up for straightening the rod
 XF = output_IVP.x;
 % disp('Here is the first IVP sol = ')
 % disp(XF)
 
-% Solve the continuation problem for straightening the rod
-for m = 1:500
+% Straightening the rod
+for m = 1:200
 
         % fprintf('Entering forloop round %i \n', m)
         
@@ -30,7 +30,9 @@ for m = 1:500
         xf = XF;
         
         % Cut and rescale rod by next-to-last entry
-        XF(end,:) = [xf(200,1)/.995, xf(200,2)/.995, xf(200,3)];
+        % Adjust discretization by iteration number for efficiency
+        XF(end,:) = [xf(end-1,1)/(1-1/(201-m)), ...
+            xf(end-1,2)/(1-1/(201-m)), xf(end-1,3)];
         % disp('rescaled')
         % disp(XF)
         
@@ -38,7 +40,7 @@ for m = 1:500
         newxf = XF(end,:);
         
         % Solve BVP with final position in line with updated rod
-        output_BVP = solve_BVP(x0,p0,newxf,tf,params);
+        output_BVP = solve_BVP(x0,p0,newxf,tf,params,m);
         
         % Re-update
         p0 = output_BVP.p0;
