@@ -1,5 +1,11 @@
 function output = main_continuation_solver
 
+% Computation time start
+tic
+
+% Test n random p0 values
+for n = 1:50
+
 % Final time
 tf = 1;
 
@@ -9,8 +15,8 @@ x0 = [0 0 0];
 % Parameters
 params = parameters;
 
-% Guess for initial condition p(0)
-p0 = [0 0 1];
+% Randomly select a p0 between -10 and 10 to test
+p0 = 10 + (-10 - 10).*rand(1,3);
 
 % Solve IVP to find stable shape
 output_IVP = solve_IVP(x0,p0,tf,params,0);
@@ -23,6 +29,9 @@ XF = output_IVP.x;
 
 % Straightening the rod
 for m = 1:200
+        
+        % Store p0
+        output_tester(n,m).startp0 = p0;
 
         % fprintf('Entering forloop round %i \n', m)
         
@@ -39,8 +48,20 @@ for m = 1:200
         % Update list of rod points
         newxf = XF(end,:);
         
-        % Solve BVP with final position in line with updated rod
-        output_BVP = solve_BVP(x0,p0,newxf,tf,params,m);
+        % Determine if there was an error in solve_BVP for this p0
+        try
+                % Solve BVP with final position in line with updated rod
+                output_BVP = solve_BVP(x0,p0,newxf,tf,params,m);
+                % output_BVP.p0 will not exist if there was an error in solve_BVP
+                testing = output_BVP.p0;
+        catch
+                % disp('bad p0')
+                % If there was an error in solve_BVP, store the specific error
+                output_tester(n,m).error = output_BVP.catch;
+                break
+        end
+        % If there was no error, store that information
+        output_tester(n,m).error = 'no error';
         
         % Re-update
         p0 = output_BVP.p0;
@@ -58,6 +79,18 @@ for m = 1:200
             break
         end
         
+        % Store final p0 and conjugate points (if any)
+        output_tester(n,m).endp0 = p0;
+        output_tester(n,m).tconj = output_BVP.tconj;
+
+% m forloop
 end 
 
+% n forloop
+end
+
+% Computation time end
+toc
+
+% function
 end
