@@ -14,7 +14,8 @@ function output_BVP = solve_BVP(x0,p0,xf,tf,params,m)
 i = 0;
 output_BVP = [];
 
-% Not yet sure why this try/catch is necessary but seems to need it
+% We need the try/catch so that if we encounter a line search fail,
+% solve_BVP still outputs output_BVP.catch
 try
 
 % Boundary value problem loop
