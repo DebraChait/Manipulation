@@ -14,6 +14,9 @@ function output_BVP = solve_BVP(x0,p0,xf,tf,params,m)
 i = 0;
 output_BVP = [];
 
+% Not yet sure why this try/catch is necessary but seems to need it
+try
+
 % Boundary value problem loop
 while i <= params.nmax
     
@@ -64,15 +67,21 @@ while i <= params.nmax
     
     % Update p0 with line search
     if ~isempty(step)
-         p0 = p0+step*dp0';
+        p0 = p0+step*dp0';
     else
-         error('line search failed')
+        output_BVP.catch = 'line search failed';
+        error('line search failed')
     end
     
 end
 
 if output_IVP.err > params.tol
+    output_BVP.catch = 'BVP solver failed';
     error('BVP solver failed')
+end
+
+% Again, not sure why this try/catch is necessary but seems to need it
+catch
 end
                   
 end
