@@ -13,78 +13,86 @@ function output_BVP = solve_BVP(x0,p0,xf,tf,params,m)
 % Initialize counter and output
 i = 0;
 output_BVP = [];
+output_IVP = [];
 
 % We need the try/catch so that if we encounter a line search fail,
 % solve_BVP still outputs output_BVP.catch
 try
 
-% Boundary value problem loop
-while i <= params.nmax
-    
-    % Iterate i
-    i = i+1;
-    % Solve IVP
-    output_IVP = solve_IVP(x0,p0,tf,params,m);
-    % Compute error between current and desired value of x(tf)
-    output_IVP.eta = ...
-        [output_IVP.x(end,1)-xf(1); % For component x1
-         output_IVP.x(end,2)-xf(2); % For component x2
-         wrapToPi(output_IVP.x(end,3)-xf(3))]; % Adjusts the angle x3 to 
-                                               % be between -pi and pi     
-    output_IVP.err = norm(output_IVP.eta);
-    
-    % Print variables of interest
-    fprintf('iteration: %.0f    error: %.10f \n',i,output_IVP.err)
-    
-    % Plot solution
-    plot_function(output_IVP,xf)
-    
-    % Check if error tolerance is satisfied
-    if output_IVP.err <= params.tol
-        output_BVP = output_IVP;
-        output_BVP.p0 = p0;
-        break
+    % Boundary value problem loop
+    while i < params.nmax
+
+        % Iterate i
+        i = i+1;
+        % Solve IVP
+        output_IVP = solve_IVP(x0,p0,tf,params,m);
+        % Compute error between current and desired value of x(tf)
+        output_IVP.eta = ...
+            [output_IVP.x(end,1)-xf(1); % For component x1
+             output_IVP.x(end,2)-xf(2); % For component x2
+             wrapToPi(output_IVP.x(end,3)-xf(3))]; % Adjusts the angle x3 to 
+                                                   % be between -pi and pi     
+        output_IVP.err = norm(output_IVP.eta);
+
+        % Print variables of interest
+        % fprintf('iteration: %.0f    error: %.10f \n',i,output_IVP.err)
+
+        % Plot solution, pause to see starting shape
+        plot_function(output_IVP,xf)
+        if m==1
+            pause(1)
+        end
+
+        % If error is minute, we've found a solution
+        if output_IVP.err <= params.tol
+            output_BVP = output_IVP;
+            output_BVP.p0 = p0;
+            break
+        end
+
+        % Compute search direction for p0
+        jacobian = output_IVP.J(:,:,end); % all columns and rows thru end
+            % J gives change in x needed to reach sol, functions as slope
+            % of tan line for our guess
+        dp0 = -jacobian\output_IVP.eta; 
+        % A\B gives sol x for Ax=B, so A\B = {A inverse}*B
+        % We are trying to reduce the error in x1(tf), x2(tf), x3(tf) to 0, 
+        % so we use output_IVP.eta as the function that we approximate
+
+        % Enforce maximum step size
+        if norm(dp0) > params.maxstep
+            dp0 = dp0/norm(dp0)*params.maxstep;
+        end
+
+        % Update p0 basic
+        % p0 = p0 + dp0';
+
+        % Use line search to find step size that ensures error decreases
+        step = line_search(x0,p0,xf,dp0,tf,output_IVP.err,params,m);
+
+        % Update p0 with line search
+        if ~isempty(step)
+            p0 = p0+step*dp0';
+        else
+            % If line search failed, store the specific error
+            output_BVP.catch = 'line search failed';
+            error('line search failed')
+        end
+
     end
-    
-    % Compute search direction for p0
-    jacobian = output_IVP.J(:,:,end); % all columns and rows thru end
-        % J gives change in x needed to reach sol, functions as slope
-        % of tan line for our guess
-    dp0 = -jacobian\output_IVP.eta; 
-    % A\B gives sol x for Ax=B, so A\B = {A inverse}*B
-    % We are trying to reduce the error in x1(tf), x2(tf), x3(tf) to 0, 
-    % so we use output_IVP.eta as the function that we approximate
-    
-    % Enforce maximum step size
-    if norm(dp0) > params.maxstep
-        dp0 = dp0/norm(dp0)*params.maxstep;
-    end
-    
-    % Update p0
-    % p0 = p0 + dp0';
-    
-    % Use line search to find step size that ensures error decreases
-    step = line_search(x0,p0,xf,dp0,tf,output_IVP.err,params,m);
-    
-    % Update p0 with line search
-    if ~isempty(step)
-        p0 = p0+step*dp0';
+
+    if output_IVP.err > params.tol
+        output_BVP.catch = 'BVP solver failed';
+        error('BVP solver failed')
     else
-        output_BVP.catch = 'line search failed';
-        error('line search failed')
+        output_BVP.catch = 'no error';
     end
-    
-end
 
-if output_IVP.err > params.tol
-    output_BVP.catch = 'BVP solver failed';
-    error('BVP solver failed')
-end
-
-% Again, not sure why this try/catch is necessary but seems to need it
+% If caught an error, end the program and return output_BVP values created
 catch
 end
-                  
+ 
+% End solve_BVP function 
 end
 
 function step = line_search(x0,p0,xf,dp0,tf,err,params,m)
@@ -128,5 +136,6 @@ while newerr > (1-params.decrease_param)*err
         break
     end 
 end
-    
+   
+% End line_search function   
 end
