@@ -1,122 +1,117 @@
 function output_tester = main_continuation_tester
+% Tests n random p0s for straightening
+% Output n x m array of fields startp0, error, endp0, tconj
+% .startp0 stores starting p of the n-th random p0 value in BVP
+% .error stores no error, line search failed, or BVP solver failed for each step
+% .endp0 stores new p0 after each BVP
+% .tconj stores any conjugate points
 
+
+% Total computation time
 tic
+
+% Test n random p0 values for straightening
 for n = 1:50
     
+    % fprintf('n = %i \n',n)
 
-% fprintf('n = %i \n',n)
+    % Randomly select a p0 between -10 and 10 to test
+    p0 = 10 + (-10 - 10).*rand(1,3);
 
-% Randomly select a p0 between -10 and 10 to test
-p0 = 10 + (-10 - 10).*rand(1,3);
+    % output_tester(n).startp0 = p0;
 
-% output_tester(n).startp0 = p0;
+    % Final time
+    tf = 1;
 
-% Final time
-tf = 1;
+    % Initial condition for x(0)
+    x0 = [0 0 0];
 
-% Initial condition for x(0)
-x0 = [0 0 0];
+    % Final position for straight rod, horizontal dist of 1 from x0 position
+    goal = x0;
+    goal(1) = x0(1) + 1;
 
-% Parameters
-params = parameters;
+    % Parameters
+    params = parameters;
 
-% Solve IVP to find stable shape
-output_IVP = solve_IVP(x0,p0,tf,params,0);
-% disp('solved IVP');
+    % Solve IVP to find stable shape
+    output_IVP = solve_IVP(x0,p0,tf,params,0);
+    % disp('solved IVP');
 
-% Set up for straightening the rod
-XF = output_IVP.x;
-% disp('Here is the first IVP sol = ')
-% disp(XF)
+    % Set up for straightening the rod with BVP
+    XF = output_IVP.x;
+    % disp('Here is the first IVP sol = ')
+    % disp(XF)
 
 
-% Straightening the rod
-for m = 1:200
-    
-    output_tester(n,m).startp0 = p0;
+    % Straightening the rod by BVP, cut and rescale method
+    % 199 to avoid discretization problems in solve_IVP
+    for m = 1:199
+
+        % Store initial p0 for each iteration of each random p0
+        output_tester(n,m).startp0 = p0;
 
         % fprintf('Entering forloop round %i \n', m)
-        
+
         % Initialize list of rod points
         xf = XF;
-        
+
         % Cut and rescale rod by next-to-last entry
         % Adjust discretization by iteration number for efficiency
         XF(end,:) = [xf(end-1,1)/(1-1/(201-m)), ...
             xf(end-1,2)/(1-1/(201-m)), xf(end-1,3)];
-        % disp('rescaled')
-        % disp(XF)
-        
+            % disp('rescaled')
+            % disp(XF)
+
         % Update list of rod points
         newxf = XF(end,:);
         
-        try 
-            % Solve BVP with final position in line with updated rod
-            output_BVP = solve_BVP(x0,p0,newxf,tf,params,m);
-%             output_tester(n,m).error = output_BVP.catch;
-            testing = output_BVP.p0;
-        catch
-            % disp('bad p0')
-            % try
-            output_tester(n,m).error = output_BVP.catch;
-            % catch
-            %     output_tester(n,m).error = 'weird'
-            % end
-            % find a way to show what error it encountered
-            % if encountered a conjugate point, store that point
-            break
+        output_BVP = solve_BVP(x0,p0,newxf,tf,params,m);
+        
+        % Store any error encountered in straightening, or if no errors
+        output_tester(n,m).error = output_BVP.catch;
+
+        % Try/catch block in case error prevented creation of output_BVP fields
+        % p0, x, tconj
+        try
+        
+            % Re-update
+            p0 = output_BVP.p0;
+            XF = output_BVP.x;
+            % disp('after BVP')
+            % disp(XF)
+
+            % Test for sufficient straightness
+            % Check that slope at each point is close to 0
+            suffstraight = 1;
+            for i = 1:length(XF)
+                slope = (XF(i,2)-x0(2))/(XF(i,1)-x0(1));
+                if abs(slope) > 0.02
+                    suffstraight = 0;
+                    break
+                end
+            end
+            % If every point has slope ~0, break from straightening loop
+            if suffstraight == 1
+                break
+            end
+
+            output_tester(n,m).endp0 = p0;
+            output_tester(n,m).tconj = output_BVP.tconj;
+            
+        catch 
+            % If encountered an error, break from straightening loop
+            break 
         end
-        output_tester(n,m).error = 'no error';
-        
-        
-        % Re-update
-        p0 = output_BVP.p0;
-        XF = output_BVP.x;
-        % disp('after BVP')
-        % disp(XF)
-        
-        % Test for sufficient straightness
-        % See if final xf is within small range of [1 0 0]
-        
-        endx1 = XF(end,1);
-        endx2 = XF(end,2);
-        % fprintf('endx1 = %.3d, endx2 = %.3d \n', endx1,endx2)
-        slopenow = endx2/endx1;
-        % fprintf('slope is %.3d at iteration %i \n',slopenow,m)
-        if abs(slopenow)<.03
-            break
-        end
-        
-        output_tester(n,m).endp0 = p0;
-        output_tester(n,m).tconj = output_BVP.tconj;
-end
-
-% Store starting p0, final p0, conj pts (if any), and error (if any)
-% Plot the p0s
-
-% disp('p0 = ')
-% disp(p0)
-% fprintf('norm(p0) = %.3d \n', norm(p0))
-
-% If there was an error, there will be no output_BVP.tconj
-try
-    if ~isempty(output_BVP.tconj)
-%         disp('conjugate points')
-%         disp(output_BVP.tconj)
-    else
-       % disp('no conjugate points')
+     
+    % End of straightening loop m for a specific random p0
     end
-catch
-end
- 
-% output_tester(n).endp0 = p0;
-% if ~isempty(output_BVP.tconj)
-%         output_tester(n).tconj = output_BVP.tconj
-%     else
-%         disp('no conjugate points')
-% end 
 
+% End of random p0 loop n
 end
 
+% End computation time
 toc
+
+
+% End of function main_continuation_tester
 end
