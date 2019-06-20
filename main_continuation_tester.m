@@ -26,10 +26,6 @@ for n = 1:50
     % Initial condition for x(0)
     x0 = [0 0 0];
 
-    % Final position for straight rod, horizontal dist of 1 from x0 position
-    goal = x0;
-    goal(1) = x0(1) + 1;
-
     % Parameters
     params = parameters;
 
