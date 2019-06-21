@@ -105,6 +105,14 @@ for n = 1:50
 % End of random p0 loop n
 end
 
+% Save errors 
+disp('This is where the error should be outputting')
+for i = 1:198
+    err(:,i) = extractfield(output_tester(:,i),'error')
+end
+
+err2 = err'
+
 % End computation time
 toc
 
