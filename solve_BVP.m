@@ -64,13 +64,13 @@ try
             dp0 = dp0/norm(dp0)*params.maxstep;
         end
 
-        % Update p0 basic
+        % Update p0 basic for a better guess
         % p0 = p0 + dp0';
 
         % Use line search to find step size that ensures error decreases
         step = line_search(x0,p0,xf,dp0,tf,output_IVP.err,params,m);
 
-        % Update p0 with line search
+        % Update p0 with line search for a better guess
         if ~isempty(step)
             p0 = p0+step*dp0';
         else
