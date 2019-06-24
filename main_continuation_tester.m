@@ -34,6 +34,7 @@ for n = 1:50
     % disp('solved IVP');
 
     % Set up for straightening the rod with BVP
+    % Gives position of discretized points on rod for starting stable shape
     XF = output_IVP.x;
     % disp('Here is the first IVP sol = ')
     % disp(XF)
