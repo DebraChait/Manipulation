@@ -64,7 +64,24 @@ for n = 1:50
         
         output_BVP = solve_BVP(x0,p0,newxf,tf,params,m);
         
-        % Store any error encountered in straightening, or if no errors
+        % Before checking for errors, test for sufficient straightness
+        % Check that slope at each point is close to 0
+        suffstraight = 1;
+        for i = 1:length(XF)
+            slope = (XF(i,2)-x0(2))/(XF(i,1)-x0(1));
+            if abs(slope) > 0.02
+                suffstraight = 0;
+                break
+            end
+        end
+        % If every point has slope ~0, break from straightening loop
+        if suffstraight == 1
+            output_tester(n,m).error = 'straight';
+            break
+        end
+        
+        % If not yet straight, store any error encountered in 
+        % straightening, or if no errors
         output_tester(n,m).error = output_BVP.catch;
 
         % Try/catch block in case error prevented creation of output_BVP fields
@@ -76,22 +93,6 @@ for n = 1:50
             XF = output_BVP.x;
             % disp('after BVP')
             % disp(XF)
-
-            % Test for sufficient straightness
-            % Check that slope at each point is close to 0
-            suffstraight = 1;
-            for i = 1:length(XF)
-                slope = (XF(i,2)-x0(2))/(XF(i,1)-x0(1));
-                if abs(slope) > 0.02
-                    suffstraight = 0;
-                    break
-                end
-            end
-            % If every point has slope ~0, break from straightening loop
-            if suffstraight == 1
-                output_tester(n,m).error = 'straight';
-                break
-            end
 
             output_tester(n,m).endp0 = p0;
             output_tester(n,m).tconj = output_BVP.tconj;
