@@ -70,7 +70,7 @@ for n = 1:50
         suffstraight = 1;
         for i = 2:length(XF)
             slope = (XF(i,2)-XF(i-1,2))/(XF(i,1)-XF(i-1,1));
-            if abs(slope) > 0.02
+            if abs(slope) > 0.025
                 suffstraight = 0;
                 break
             end
