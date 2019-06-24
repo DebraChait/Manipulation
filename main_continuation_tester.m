@@ -65,10 +65,11 @@ for n = 1:50
         output_BVP = solve_BVP(x0,p0,newxf,tf,params,m);
         
         % Before checking for errors, test for sufficient straightness
-        % Check that slope at each point is close to 0
+        % Check that slope in between every 2 consecutive points is 
+        % close to 0
         suffstraight = 1;
-        for i = 1:length(XF)
-            slope = (XF(i,2)-x0(2))/(XF(i,1)-x0(1));
+        for i = 2:length(XF)
+            slope = (XF(i,2)-XF(i-1,2))/(XF(i,1)-XF(i-1,1));
             if abs(slope) > 0.02
                 suffstraight = 0;
                 break
