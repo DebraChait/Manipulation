@@ -113,8 +113,8 @@ for n = 1:50
 end
 
 % Save errors 
-disp('This is where the error should be outputting')
-for i = 1:198
+outputlength = length(output_tester);
+for i = 1:outputlength
     err(:,i) = extractfield(output_tester(:,i),'error')
 end
 
