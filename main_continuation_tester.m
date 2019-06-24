@@ -77,6 +77,9 @@ for n = 1:50
         end
         % If every point has slope ~0, break from straightening loop
         if suffstraight == 1
+            % Note that sometimes doesn't pass this test but has no
+            % tolerance error from BVP solver. Still okay or require
+            % rod to pass this test?
             output_tester(n,m).error = 'straight';
             break
         end
