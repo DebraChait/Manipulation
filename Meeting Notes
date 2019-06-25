@@ -1,0 +1,13 @@
+%% Project Meeting Notes
+
+%% 6/25/19 Meeting
+% If the curvature is very high, we could use a 2nd derivative test to
+% make iterations higher ( may or may not be productive use of time?)
+% - Also make plots for endp0s with same error plots
+% Make p1 and p2 (-30,30) larger, and p3(-10,10) smaller (More curved rods tend to be more
+% stable)
+% Save ans so that we can just replot data without having to rerun code
+% load command will load file
+% Save trials (figure out a command)
+% Method #2: Chop original and use chopped end as new boundary condition,
+% repeat this process
