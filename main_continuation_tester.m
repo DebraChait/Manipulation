@@ -155,6 +155,28 @@ for i = 1:n
    end
 end
 
+% Plot the initial p0s sorted by error
+if ~isempty(straight)
+    figure(2)
+    straightplot = plot3(straight(:,1),straight(:,2),straight(:,3), 'bo')
+    title('Straight')
+end
+if ~isempty(bvpfail)
+    figure(3)
+    bvpplot = plot3(bvpfail(:,1),bvpfail(:,2),bvpfail(:,3), 'go')
+    title('BVP solver fail')
+end
+if ~isempty(lsfail)
+    figure(4)
+    lsfplot = plot3(lsfail(:,1),lsfail(:,2),lsfail(:,3), 'ro')
+    title('Line search fail')
+end
+if ~isempty(noerr)
+    figure(5)
+    noerrplot = plot3(noerr(:,1),noerr(:,2),noerr(:,3), 'mo')
+    title('No error, not straight')
+end
+
 % End computation time
 toc
 
