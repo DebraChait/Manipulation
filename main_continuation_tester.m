@@ -120,6 +120,41 @@ end
 
 err2 = err'
 
+% Sort by errors
+bvpfail = [];
+lsfail = [];
+straight = [];
+noerr = [];
+
+% errsavetemp tells us the error at each step
+% errsave(i) tells us result of random p0 #i
+errsavetemp='';
+errsave = [];
+
+% Collect final error for each random p0
+for i = 1:n
+    for j = 1:outputlength
+        errsavetemp = err2(j,i);
+        if ~contains(err2(j,i),'no error')
+            break
+        end
+    end
+    errsave = [errsave,errsavetemp];
+end
+
+% Sort initial p0 values by error
+for i = 1:n
+   if contains(errsave(i),'straight')
+       straight = [straight; output_tester(i,1).startp0];
+   elseif contains(errsave(i),'BVP solver failed')
+       bvpfail = [bvpfail; output_tester(i,1).startp0];
+   elseif contains(errsave(i),'line search failed')
+       lsfail = [lsfail; output_tester(i,1).startp0];
+   elseif contains(errsave(i),'no error')
+       noerr = [noerr; output_tester(i,1).startp0];
+   end
+end
+
 % End computation time
 toc
 
