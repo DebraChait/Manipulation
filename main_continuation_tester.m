@@ -84,6 +84,14 @@ for n = 1:50
             break
         end
         
+        % Second test for sufficient straightness
+        % See if final xf is within small range of [1 0 0]
+        suff = .001;
+        if abs(XF(end,1)-goal(1))<suff && abs(XF(end,2)-goal(2))<suff
+            output_tester(n,m).error = 'straight';
+            break
+        end
+        
         % If not yet straight, store any error encountered in 
         % straightening, or if no errors
         output_tester(n,m).error = output_BVP.catch;
