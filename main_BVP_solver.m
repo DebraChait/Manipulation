@@ -16,6 +16,6 @@ params = parameters;
 p0 = [0 0 1];
 
 % Solve the boundary value problem
-output = solve_BVP(x0,p0,xf,tf,params);
+output = solve_BVP(x0,p0,xf,tf,params,m);
 
 end
