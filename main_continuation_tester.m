@@ -1,10 +1,14 @@
-function output_tester = main_continuation_tester
+function [output_tester, straightstart, bvpfailstart, lsfailstart,...
+    noerrstart, straightend, bvpfailend, lsfailend, noerrend] = ...
+    main_continuation_tester
 % Tests n random p0s for straightening
-% Output n x m array of fields startp0, error, endp0, tconj
+% output_tester n x m array of fields startp0, error, endp0, tconj
 % .startp0 stores starting p of the n-th random p0 value in BVP
 % .error stores no error, line search failed, or BVP solver failed for each step
 % .endp0 stores new p0 after each BVP
 % .tconj stores any conjugate points
+% straightstart, bvpfailstart, etc store the initial p0s sorted by error
+% straightend, bvpfailend, etc store the final p0s sorted by error
 
 
 % Total computation time
@@ -125,14 +129,7 @@ outputlength = length(output_tester);
 for i = 1:outputlength
     err(:,i) = extractfield(output_tester(:,i),'error')
 end
-
 err2 = err'
-
-% Sort by errors
-bvpfail = [];
-lsfail = [];
-straight = [];
-noerr = [];
 
 % errsavetemp tells us the error at each step
 % errsave(i) tells us result of random p0 #i
@@ -151,39 +148,71 @@ for i = 1:n
 end
 
 % Sort initial p0 values by error
+bvpfailstart = [];
+lsfailstart = [];
+straightstart = [];
+noerrstart = [];
+
 for i = 1:n
    if contains(errsave(i),'straight')
-       straight = [straight; output_tester(i,1).startp0];
+       straightstart = [straightstart; output_tester(i,1).startp0];
    elseif contains(errsave(i),'BVP solver failed')
-       bvpfail = [bvpfail; output_tester(i,1).startp0];
+       bvpfailstart = [bvpfailstart; output_tester(i,1).startp0];
    elseif contains(errsave(i),'line search failed')
-       lsfail = [lsfail; output_tester(i,1).startp0];
+       lsfailstart = [lsfailstart; output_tester(i,1).startp0];
    elseif contains(errsave(i),'no error')
-       noerr = [noerr; output_tester(i,1).startp0];
+       noerrstart = [noerrstart; output_tester(i,1).startp0];
    end
 end
 
+% Sort final p0 values by error
+bvpfailend = [];
+lsfailend = [];
+straightend = [];
+noerrend = [];
+
+for i = 1:n
+    for j = 0:outputlength-1
+        last = outputlength-j;
+        if ~isempty(output_tester(i,last).endp0)
+            fprintf('last for i = %i \n',i)
+            disp(last)
+            if contains(errsave(i),'straight')
+                straightend = [straightend; output_tester(i,last).endp0];
+            elseif contains(errsave(i),'BVP solver failed')
+                bvpfailend = [bvpfailend; output_tester(i,last).endp0];
+            elseif contains(errsave(i),'line search failed')
+                lsfailend = [lsfailend; output_tester(i,last).endp0];
+            elseif contains(errsave(i),'no error')
+                noerrend = [noerrend; output_tester(i,last).endp0];
+            end
+            break
+        end
+    end
+end
+
 % Plot the initial p0s sorted by error
-if ~isempty(straight)
-    figure(2)
-    straightplot = plot3(straight(:,1),straight(:,2),straight(:,3), 'bo')
-    title('Straight')
-end
-if ~isempty(bvpfail)
-    figure(3)
-    bvpplot = plot3(bvpfail(:,1),bvpfail(:,2),bvpfail(:,3), 'go')
-    title('BVP solver fail')
-end
-if ~isempty(lsfail)
-    figure(4)
-    lsfplot = plot3(lsfail(:,1),lsfail(:,2),lsfail(:,3), 'ro')
-    title('Line search fail')
-end
-if ~isempty(noerr)
-    figure(5)
-    noerrplot = plot3(noerr(:,1),noerr(:,2),noerr(:,3), 'mo')
-    title('No error, not straight')
-end
+% Might want to make a separate function for this, ignore for now
+% if ~isempty(straight)
+%     figure(2)
+%     straightplot = plot3(straight(:,1),straight(:,2),straight(:,3), 'bo')
+%     title('Straight')
+% end
+% if ~isempty(bvpfail)
+%     figure(3)
+%     bvpplot = plot3(bvpfail(:,1),bvpfail(:,2),bvpfail(:,3), 'go')
+%     title('BVP solver fail')
+% end
+% if ~isempty(lsfail)
+%     figure(4)
+%     lsfplot = plot3(lsfail(:,1),lsfail(:,2),lsfail(:,3), 'ro')
+%     title('Line search fail')
+% end
+% if ~isempty(noerr)
+%     figure(5)
+%     noerrplot = plot3(noerr(:,1),noerr(:,2),noerr(:,3), 'mo')
+%     title('No error, not straight')
+% end
 
 % End computation time
 toc
