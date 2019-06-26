@@ -20,7 +20,7 @@ for n = 1:50
     % fprintf('n = %i \n',n)
 
     % Randomly select a p0 between -10 and 10 to test
-    p0 = 10 + (-10 - 10).*rand(1,3);
+    p0 = [30 + (-30 - 30).*rand(1,2), 10 + (-10 - 10).*rand(1)];
 
     % output_tester(n).startp0 = p0;
 
