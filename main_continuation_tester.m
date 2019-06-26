@@ -122,6 +122,11 @@ for n = 1:50
             % If encountered an error, break from straightening loop
             break 
         end
+        
+        if ~isempty(output_tester(n,m).tconj)
+            fprintf('found a conjugate point at m = %i',m)
+            disp(output_tester(n,m).tconj)
+        end 
      
     % End of straightening loop m for a specific random p0
     end
