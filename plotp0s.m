@@ -11,7 +11,7 @@ bvpfailenddata = [];
 lsfailenddata = [];
 noerrenddata = [];
 
-for i = 1:3
+for i = 1:10
     
     % Load the data
     filename = sprintf('plotp0_%i',i)
@@ -29,8 +29,8 @@ for i = 1:3
 end
 
 % Plot the start p0s, colored by error
-view(3)
 figure(1)
+view(3)
 hold on
 if ~isempty(bvpfailstartdata)
 plot3(bvpfailstartdata(:,1), bvpfailstartdata(:,2), ...
@@ -53,8 +53,8 @@ legend('bvpfailstart','noerrstart','straightstart',...
     'lsfailstart', 'Location', 'Best')
 
 % Plot the end p0s, colored by error
-view(3)
 figure(2)
+view(3)
 hold on
 if ~isempty(bvpfailenddata)
 plot3(bvpfailenddata(:,1), bvpfailenddata(:,2), ...
