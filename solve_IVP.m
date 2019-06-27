@@ -54,10 +54,14 @@ function tconj = is_stable(tconj,ie)
 % to pass a certain threshold before finding det(J)=0
 % This prevents Matlab from mistaking small det(J) as det(J) = 0
 
+% Find the index of the first instance where det(J) passes threshold
 ithreshold = find(ie==2,1,'first');
 if (~isempty(ithreshold))
+    % Find indices where det(J) is marked as 0
     iconj = find(ie==1);
+    % Only keep indices of conj pts past the threshold index
     iconj = iconj(iconj>ithreshold);
+    % Update tconj to only contain those verified conj points
     if (~isempty(iconj))
         tconj = tconj(iconj);
     else
