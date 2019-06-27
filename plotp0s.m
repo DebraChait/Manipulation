@@ -87,5 +87,38 @@ for i = 1:3
     end
 end
 
+for i = 1:3
+    i
+    % Load the data
+    filename = sprintf('plotp0_%i',i)
+    load(filename) 
+    
+    if ~isempty(straightstart)
+        straightstartdata = [straightstartdata; straightstart];
+    end
+    if ~isempty(bvpfailstart)
+        bvpfailstartdata = [bvpfailstartdata; bvpfailstart];
+    end
+    if ~isempty(lsfailstart)
+        lsfailstartdata = [lsfailstartdata; lsfailstart];
+    end
+    if ~isempty(noerrstart)
+        noerrstartdata = [noerrstartdata; noerrstart];
+    end
+    if ~isempty(straightend)
+        straightenddata = [straightenddata; straightend];
+    end
+    if ~isempty(bvpfailend)
+        bvpfailenddata = [bvpfailenddata; bvpfailend];
+    end
+    if ~isempty(lsfailend)
+        lsfailenddata = [lsfailenddata; lsfailend];
+    end
+    if ~isempty(noerrend)
+        noerrenddata = [noerrenddata; noerrend];
+    end
+
+end
+
 
 end
