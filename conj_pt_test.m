@@ -1,4 +1,4 @@
-function [detJ,isterminal,direction] = conj_pt_test(t,Y)
+function [value,isterminal,direction] = conj_pt_test(t,Y)
 % Inputs t = arc length, Y = solution vector at arc length t
 % Computes det(J) to see if suff cond's were met. 
 % If det(J)=0 at any point, found a non-minimum local extrema == conj pt
