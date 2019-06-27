@@ -87,6 +87,16 @@ for i = 1:3
     end
 end
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+straightstartdata = [];
+bvpfailstartdata = [];
+lsfailstartdata = [];
+noerrstartdata = [];
+straightenddata = [];
+bvpfailenddata = [];
+lsfailenddata = [];
+noerrenddata = [];
+
 for i = 1:3
     i
     % Load the data
