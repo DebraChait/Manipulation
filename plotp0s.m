@@ -51,6 +51,9 @@ end
 title('start p0s')
 legend('bvpfailstart','noerrstart','straightstart',...
     'lsfailstart', 'Location', 'Best')
+xlabel('p_1(0)')
+ylabel('p_2(0)')
+zlabel('p_3(0)')
 
 % Plot the end p0s, colored by error
 figure(2)
@@ -75,6 +78,9 @@ end
 title('end p0s')
 legend('bvpfailend','noerrend','straightend',...
     'lsfailend', 'Location', 'Best')
+xlabel('p_1(1)')
+ylabel('p_2(1)')
+zlabel('p_3(1)')
 
 
 % End of function
