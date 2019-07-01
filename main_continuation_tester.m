@@ -135,7 +135,20 @@ for n = 1:50
 end
 
 % Save errors 
-outputlength = length(output_tester);
+maxsize = 0;
+for i = 1:n
+    for j = 1:m
+        if isempty(output_tester(i,j).error)
+            if j-1 > maxsize
+                maxsize = j-1;
+            end
+            break
+        elseif j == m
+            maxsize = j;
+        end
+end
+outputlength = maxsize;
+
 for i = 1:outputlength
     err(:,i) = extractfield(output_tester(:,i),'error')
 end
