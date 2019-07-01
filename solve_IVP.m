@@ -21,7 +21,7 @@ J0 = zeros(3,3); % 3x3 matrix of zeros
 Y0 = [x0 p0 reshape(M0',1,9) reshape(J0',1,9)];
 
 % Solve ODEs
-[t,sol,tconj] = ode45(@(t,Y) diff_eqns(t,Y,params), [linspace(0,1,201-m)],... 
+[t,sol,tconj,~,ie] = ode45(@(t,Y) diff_eqns(t,Y,params), [linspace(0,1,201-m)],... 
                         Y0,params.ode_options);    
                         % @ tells Matlab which parameters to use and which
                         % to ignore. Matlab really only wants t,Y
@@ -43,6 +43,33 @@ output_IVP.J = permute(reshape(sol(:,16:24)',3,3,length(t)),[2 1 3]);
 % so permute restores the matrix to its original order
 
 % Store times of conjugate points
-output_IVP.tconj = tconj;
+tconjpts = is_stable(tconj,ie);
+output_IVP.tconj = tconjpts;
 
+end
+
+
+function tconj = is_stable(tconj,ie)
+% Ensure that conj points found are true conj points by requiring det(J)
+% to pass a certain threshold before finding det(J)=0
+% This prevents Matlab from mistaking small det(J) as det(J) = 0
+
+% Find the index of the first instance where det(J) passes threshold
+ithreshold = find(ie==2,1,'first');
+if (~isempty(ithreshold))
+    % Find indices where det(J) is marked as 0
+    iconj = find(ie==1);
+    % Only keep indices of conj pts past the threshold index
+    iconj = iconj(iconj>ithreshold);
+    % Update tconj to only contain those verified conj points
+    if (~isempty(iconj))
+        tconj = tconj(iconj);
+    else
+        tconj = [];
+    end
+else
+    tconj = [];
+end
+    
+    
 end
