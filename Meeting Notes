@@ -11,3 +11,18 @@
 % Save trials (figure out a command)
 % Method #2: Chop original and use chopped end as new boundary condition,
 % repeat this process
+
+%% 6/28/19 Meeting
+
+% Make another 2 plots just for conj points
+% Plots start p0s w conj points and then end p0's w conj points
+% In one plot, plot the path of p0's and change opacity of stable and
+% unstable 
+% Keep a track of p0's trajectories with conjugate points
+% Make random weight, extend to 4D p(0)space, try to map out
+% Choose range of p0's, cycle through increasing weight
+
+% Try first approach, take intial shape and rescale - don't update boundary
+% condtion each time
+% Continue cutting off ORIGINAL shape and resolve for 
+% Set xf to be cuts of initial shape (don't include in loop)
