@@ -21,7 +21,7 @@ for n = 1:1
 
     % Randomly select a p0 to test
     % First 2 components b/n -30,30 and last b/n -10,10
-    p0 = [30 + (-30 - 30).*rand(1,2), 10 + (-10 - 10).*rand(1)];
+    p0 = [30 + (-30 - 30).*rand(1,2), 4 + (-4 - 4).*rand(1)];
 
     % output_tester(n).startp0 = p0;
 
