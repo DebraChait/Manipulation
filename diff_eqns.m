@@ -5,7 +5,7 @@ function dY = diff_eqns(t,Y,params)
 
 % Set bending constant c and weight w
 c = 1;
-w = 1;
+w = 5;
 
 % Get vectors x and p
 x = Y(1:3);
