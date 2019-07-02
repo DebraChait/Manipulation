@@ -26,3 +26,15 @@
 % condtion each time
 % Continue cutting off ORIGINAL shape and resolve for 
 % Set xf to be cuts of initial shape (don't include in loop)
+
+%% 7/2/19 Meeting
+% Loosen tolerance for straightness tests
+% Pick p1 and solve BVP for set p2 and p3
+
+% 3rd Method: No solving BVPs, move through p space
+% Sample p0s, move back to orgin
+% Pick a p, set lambda [0,1], These become the new IC's
+% Solve IVP to find tconj
+% use spherical coordinates
+% discretize sphere
+% Can increase more in weight (w = 0, 5, 10...)
