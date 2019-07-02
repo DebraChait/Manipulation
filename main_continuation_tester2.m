@@ -1,6 +1,6 @@
 function [output_tester, straightstart, bvpfailstart, lsfailstart,...
     noerrstart, straightend, bvpfailend, lsfailend, noerrend] = ...
-    main_continuation_tester
+    main_continuation_tester2
 % Tests n random p0s for straightening
 % output_tester n x m array of fields startp0, error, endp0, tconj
 % .startp0 stores starting p of the n-th random p0 value in BVP
@@ -15,7 +15,7 @@ function [output_tester, straightstart, bvpfailstart, lsfailstart,...
 tic
 
 % Test n random p0 values for straightening
-for n = 1:50
+for n = 1:1
     
     % fprintf('n = %i \n',n)
 
@@ -44,32 +44,31 @@ for n = 1:50
 
     % Set up for straightening the rod with BVP
     % Gives position of discretized points on rod for starting stable shape
-    XF = output_IVP.x;
+    XF_IVP = output_IVP.x
     % disp('Here is the first IVP sol = ')
     % disp(XF)
-
+    nxf = [];
 
     % Straightening the rod by BVP, cut and rescale method
     % 199 to avoid discretization problems in solve_IVP
     for m = 1:199
-
+        m
         % Store initial p0 for each iteration of each random p0
         output_tester(n,m).startp0 = p0;
-
-        % fprintf('Entering forloop round %i \n', m)
-
-        % Initialize list of rod points
-        xf = XF;
-
-        % Cut and rescale rod by next-to-last entry
+        
+        if m == 1
+            xf = XF_IVP;
+        end
+        
+        % Cut and rescale rod by original IVP entries
         % Adjust discretization by iteration number for efficiency
-        XF(end,:) = [xf(end-1,1)/(1-1/(201-m)), ...
-            xf(end-1,2)/(1-1/(201-m)), xf(end-1,3)];
-            % disp('rescaled')
-            % disp(XF)
+        xf(end,:) = [XF_IVP(201-m,1)/(1-m/200),...
+            XF_IVP(201-m,2)/(1-m/200), XF_IVP(201-m,3)]
+        newxf = xf(end,:);
+        nxf = [nxf; newxf];
 
         % Update list of rod points
-        newxf = XF(end,:);
+       %%% newxf = XF(end,:);
         
         output_BVP = solve_BVP(x0,p0,newxf,tf,params,m);
         
@@ -77,8 +76,8 @@ for n = 1:50
         % Check that slope in between every 2 consecutive points is 
         % close to 0
         suffstraight = 1;
-        for i = 2:length(XF)
-            slope = (XF(i,2)-XF(i-1,2))/(XF(i,1)-XF(i-1,1));
+        for i = 2:length(xf)
+            slope = (xf(i,2)-xf(i-1,2))/(xf(i,1)-xf(i-1,1));
             if abs(slope) > 0.025
                 suffstraight = 0;
                 break
@@ -96,14 +95,14 @@ for n = 1:50
         % Second test for sufficient straightness
         % See if final xf is within small range of [1 0 0]
         suff = .001;
-        if abs(XF(end,1)-goal(1))<suff && abs(XF(end,2)-goal(2))<suff
+        if abs(xf(end,1)-goal(1))<suff && abs(xf(end,2)-goal(2))<suff
             output_tester(n,m).error = 'straight';
             break
         end
         
         % If not yet straight, store any error encountered in 
         % straightening, or if no errors
-        output_tester(n,m).error = output_BVP.catch;
+       output_tester(n,m).error = output_BVP.catch;
 
         % Try/catch block in case error prevented creation of output_BVP fields
         % p0, x, tconj
@@ -111,7 +110,7 @@ for n = 1:50
         
             % Re-update
             p0 = output_BVP.p0;
-            XF = output_BVP.x;
+            xf = output_BVP.x;
             % disp('after BVP')
             % disp(XF)
 
