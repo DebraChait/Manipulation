@@ -5,6 +5,8 @@ function output = plotconjpath
 
 unstablep0 = [];
 stablep0 = [];
+% For plotting all paths, not just ones that have a conj point
+stablep0nc = [];
 
 for i = 1:10
 
@@ -43,6 +45,9 @@ for i = 1:10
         if ~isempty(unstablenow)
             unstablep0 = [unstablep0; unstablenow];
             stablep0 = [stablep0; stablenow];
+        % else for plotting all paths, not just ones with conj points
+        else
+            stablep0nc = [stablep0nc; stablenow];
         end
 
     % end of n forloop
@@ -52,6 +57,10 @@ for i = 1:10
 end
 
 % plot it all at the end
+% For plotting all paths and not just ones with conj pts, move end of i loop 
+% to after plots and use figure(i) to separate plots, and 
+% name = sprintf('p0 paths plotp0 %i all',i); title(name), and add to leged
+
 figure(1)
 view(3)
 hold on
