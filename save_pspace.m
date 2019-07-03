@@ -34,14 +34,21 @@ for i = 0:5:10
     for j = 1:10000 
     
         p0 = [x(j), y(j), z(j)];
-        output_IVP = solve_IVP(x0,p0,tf,params,m,w);
-            
-           % Check if there's a tconj
-           if ~isempty(output_IVP.tconj) 
+        
+        for k = 0:.01:1
+        
+            p0now = [(k^2)*p0(1), (k^2)*p0(2), k*p0(3)];
+            output_IVP = solve_IVP(x0,p0now,tf,params,m,w);
+
+            % Check if there's a tconj
+            if ~isempty(output_IVP.tconj) 
                unstablep0 = [unstablep0; output_IVP.p];
-           else
+            else
                stablep0 = [stablep0; output_IVP.p];
-           end  
+            end  
+            
+        % end of k forloop
+        end
            
     % end of j forloop
     end
