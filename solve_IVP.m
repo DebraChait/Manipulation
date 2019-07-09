@@ -1,4 +1,4 @@
-function output_IVP = solve_IVP(x0,p0,tf,params,m)
+function output_IVP = solve_IVP(x0,p0,tf,params,m,w)
 % Inputs x0 = initial cond for x(0), p0 = guess for intial cond for a p(0)
 % that minimizes cost function, tf = final time
 % output_IVP contains fields t, x, p, M, J, and tconj
@@ -21,7 +21,7 @@ J0 = zeros(3,3); % 3x3 matrix of zeros
 Y0 = [x0 p0 reshape(M0',1,9) reshape(J0',1,9)];
 
 % Solve ODEs
-[t,sol,tconj,~,ie] = ode45(@(t,Y) diff_eqns(t,Y,params), [linspace(0,1,201-m)],... 
+[t,sol,tconj,~,ie] = ode45(@(t,Y) diff_eqns(t,Y,params,w), [linspace(0,1,201-m)],... 
                         Y0,params.ode_options);    
                         % @ tells Matlab which parameters to use and which
                         % to ignore. Matlab really only wants t,Y
