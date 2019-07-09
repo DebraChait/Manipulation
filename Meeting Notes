@@ -38,3 +38,16 @@
 % use spherical coordinates
 % discretize sphere
 % Can increase more in weight (w = 0, 5, 10...)
+
+%% 7/5/19 Meeting
+% Check plots of Jacobian to check stability on paths with missing segments
+% Try to just plot paths with instabilities and stable after
+% Use the find funtion to find indices with jumps in path, plot just those
+% in red and blue 
+% If tconj is empty, nonempty, then empty plot those paths
+
+% If you have a naturally curved rod with constant curvature, they funnel
+% into  a point: -curvature/bending stiffness
+
+% To solve BVP errors, add extensibility (see pics)
+% Graph funnels to check error
