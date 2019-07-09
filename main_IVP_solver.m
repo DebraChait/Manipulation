@@ -1,5 +1,8 @@
 function output = main_IVP_solver
 
+% Set weight
+w = 0;
+
 % Initial conditions for x and p
 x0 = [0 0 0];
 p0 = [-100 2 4*pi];
@@ -11,7 +14,7 @@ tf = 1;
 params = parameters;
 
 % Solve IVP
-output = solve_IVP(x0,p0,tf,params,m);
+output = solve_IVP(x0,p0,tf,params,m,w);
 
 % Make plot of x1 vs x2
 comet(output.x(:,1),output.x(:,2))

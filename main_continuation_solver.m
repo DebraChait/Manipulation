@@ -1,5 +1,8 @@
 function output = main_continuation_solver
 
+% Set weight
+w = 0;
+
 % Final time
 tf = 1;
 
@@ -13,7 +16,7 @@ params = parameters;
 p0 = [0 0 1];
 
 % Solve IVP to find stable shape
-output_IVP = solve_IVP(x0,p0,tf,params,0);
+output_IVP = solve_IVP(x0,p0,tf,params,0,w);
 % disp('solved IVP');
 
 % Set up for straightening the rod
@@ -39,7 +42,7 @@ for m = 1:200
         newxf = XF(end,:);
         
         % Solve BVP with final position in line with updated rod
-        output_BVP = solve_BVP(x0,p0,newxf,tf,params,m);
+        output_BVP = solve_BVP(x0,p0,newxf,tf,params,m,w);
         
         % Re-update
         p0 = output_BVP.p0;

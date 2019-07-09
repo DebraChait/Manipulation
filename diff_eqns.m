@@ -1,11 +1,11 @@
-function dY = diff_eqns(t,Y,params) 
+function dY = diff_eqns(t,Y,params,w) 
 % Inputs t=time, Y=vector containing solution at time t
 % Outputs diff eqns to be solved
 % Sets up necessary and sufficient cond's for local minima
 
 % Set bending constant c and weight w
 c = 1;
-w = 5;
+% w = 5;
 
 % Get vectors x and p
 x = Y(1:3);

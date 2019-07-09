@@ -10,6 +10,8 @@ function [output_tester, straightstart, bvpfailstart, lsfailstart,...
 % straightstart, bvpfailstart, etc store the initial p0s sorted by error
 % straightend, bvpfailend, etc store the final p0s sorted by error
 
+% Set weight
+w = 5;
 
 % Total computation time
 tic
@@ -39,7 +41,7 @@ for n = 1:1
     params = parameters;
 
     % Solve IVP to find stable shape
-    output_IVP = solve_IVP(x0,p0,tf,params,0);
+    output_IVP = solve_IVP(x0,p0,tf,params,0,w);
     % disp('solved IVP');
 
     % Set up for straightening the rod with BVP
@@ -70,7 +72,7 @@ for n = 1:1
         % Update list of rod points
        %%% newxf = XF(end,:);
         
-        output_BVP = solve_BVP(x0,p0,newxf,tf,params,m);
+        output_BVP = solve_BVP(x0,p0,newxf,tf,params,m,w);
         
         % Before checking for errors, test for sufficient straightness
         % Check that slope in between every 2 consecutive points is 
