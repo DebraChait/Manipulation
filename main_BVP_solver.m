@@ -1,5 +1,8 @@
 function output = main_BVP_solver
 
+% Set weight
+w = 0;
+
 % Final time
 tf = 1;
 
@@ -16,6 +19,6 @@ params = parameters;
 p0 = [0 0 1];
 
 % Solve the boundary value problem
-output = solve_BVP(x0,p0,xf,tf,params,m);
+output = solve_BVP(x0,p0,xf,tf,params,m,w);
 
 end
