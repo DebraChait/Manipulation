@@ -52,4 +52,16 @@
 % To solve BVP errors, add extensibility (see pics)
 % Graph funnels to check error
 
-%%% hi 
+%% 7/9/19 Meeting
+% We can non-dimensionalize and combine parameters as a ratio
+% Or just set cb = 1 and ce = high (100,000)
+% Hxp is der wrt x of Hp indicies are right
+% If a rod is inextensible, ce is very high
+
+% Next try extensibility, want no BVP fails
+% if that works, create funnels (conj point path plot) w/o fails 
+% Run conj point path plot with legend indicating error
+
+% Decrease number of cuts, maybe to 100
+% Use extensibilty with two methods
+
