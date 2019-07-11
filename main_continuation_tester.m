@@ -163,7 +163,7 @@ for i = 1:n
     end
     errsave = [errsave,errsavetemp];
 end
-disp(errsave)
+% disp(errsave)
 
 % Sort initial p0 values by error
 bvpfailstart = [];
