@@ -1,4 +1,4 @@
-unction [output_tester, straightstart, bvpfailstart, lsfailstart,...
+function [output_tester, straightstart, bvpfailstart, lsfailstart,...
     noerrstart, straightend, bvpfailend, lsfailend, noerrend] = ...
     main_continuation_tester
 
@@ -7,7 +7,7 @@ w = 5;
 
 for n = 1:100
     
-    fprintf('n = %i \n',n)
+    fprintf('n = %i \n',n);
     
     % Randomly select a p0 between -10 and 10 to test
     p0 = [30 + (-30 - 30).*rand(1,2), 4 + (-4 - 4).*rand(1)];

@@ -5,8 +5,13 @@ function [output_tester,bvpfailstart,lsfailstart,noerrstart,...
 
 for s = 1:10
     
+    % Method 1
     filename = sprintf('plotp02_%i',s)
     load(filename,'output_tester')
+    
+    % Method 2
+    %     filename = sprintf('plotp02_%i',s)
+    %     load(filename,'output_tester')
     
     % Save errors
     maxsize = 0;
