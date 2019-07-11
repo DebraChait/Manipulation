@@ -70,10 +70,6 @@ stablep0nc = [];
     figure(i)
     view(3)
     hold on
-    if ~isempty(stablep0nc)
-        plot3(stablep0nc(:,1), stablep0nc(:,2), ...
-            stablep0nc(:,3), '.g')
-    end
     if ~isempty(stablep0)
         plot3(stablep0(:,1),stablep0(:,2),...
             stablep0(:,3), '.b')
