@@ -1,6 +1,6 @@
 function [output_tester,bvpfailstart,lsfailstart,noerrstart,...
     straightstart,bvpfailend,lsfailend,noerrend,straightend] = resort
-    
+
 % resorts data from extensibility case to get lsfailend    
 
 for s = 1:10
@@ -110,8 +110,7 @@ for s = 1:10
     % end of line 74 forloop, endp0 error sort    
     end
     
-    %%%%% Change filename per method %%%%
-    filename2 = sprintf('plotp02good_%i',s)
+    filename2 = sprintf('plotp02extgood_%i',s)
     save(filename2,'output_tester','straightstart','bvpfailstart',...
         'lsfailstart','noerrstart','straightend','bvpfailend',...
         'lsfailend','noerrend')
