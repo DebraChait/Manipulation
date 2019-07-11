@@ -4,8 +4,8 @@ unction [output_tester, straightstart, bvpfailstart, lsfailstart,...
 
 %tic
 w = 5;
-%for n = 1:100
-for n = 1:5
+
+for n = 1:100
     
     fprintf('n = %i \n',n)
     
