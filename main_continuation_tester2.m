@@ -10,22 +10,23 @@ function [output_tester, straightstart, bvpfailstart, lsfailstart,...
 % straightstart, bvpfailstart, etc store the initial p0s sorted by error
 % straightend, bvpfailend, etc store the final p0s sorted by error
 
-% Set weight
-w = 5;
 
 % Total computation time
-tic
+% tic
+
+w = 5;
 
 % Test n random p0 values for straightening
-for n = 1:1
+for n = 1:100
     
-    % fprintf('n = %i \n',n)
+    fprintf('n = %i \n',n)
 
     % Randomly select a p0 to test
     % First 2 components b/n -30,30 and last b/n -10,10
     p0 = [30 + (-30 - 30).*rand(1,2), 4 + (-4 - 4).*rand(1)];
-
-    % output_tester(n).startp0 = p0;
+    % p0 = [24.9850731799204,-0.759932016327859,-6.65729649562770]
+    
+    output_tester(n).startp0 = p0;
 
     % Final time
     tf = 1;
@@ -41,38 +42,48 @@ for n = 1:1
     params = parameters;
 
     % Solve IVP to find stable shape
-    output_IVP = solve_IVP(x0,p0,tf,params,0,w);
+    output_IVP = solve_IVP(x0,p0,tf,params,0);
     % disp('solved IVP');
 
     % Set up for straightening the rod with BVP
     % Gives position of discretized points on rod for starting stable shape
-    XF_IVP = output_IVP.x
+    XF_IVP = output_IVP.x;
     % disp('Here is the first IVP sol = ')
     % disp(XF)
-    nxf = [];
+% nxf = [];
 
     % Straightening the rod by BVP, cut and rescale method
     % 199 to avoid discretization problems in solve_IVP
     for m = 1:199
-        m
+        
         % Store initial p0 for each iteration of each random p0
         output_tester(n,m).startp0 = p0;
         
         if m == 1
             xf = XF_IVP;
         end
-        
-        % Cut and rescale rod by original IVP entries
-        % Adjust discretization by iteration number for efficiency
         xf(end,:) = [XF_IVP(201-m,1)/(1-m/200),...
-            XF_IVP(201-m,2)/(1-m/200), XF_IVP(201-m,3)]
+            XF_IVP(201-m,2)/(1-m/200), XF_IVP(201-m,3)];
         newxf = xf(end,:);
-        nxf = [nxf; newxf];
+%         nxf = [nxf; newxf];
+
+        % Initialize list of rod points
+       % xf = XF;
+       
+        % Cut and rescale rod by next-to-last entry
+        % Adjust discretization by iteration number for efficiency
+%         XF(end,:) = [xf(end-1,1)/(1-1/(201-m)), ...
+%            xf(end-1,2)/(1-1/(201-m)), xf(end-1,3)];
+% %        XF(end,:) = [xf_ivp(201-m,1)/(1-1/(201-m)), ...
+% %            xf_ivp(201-m,2)/(1-1/(201-m)), xf_ivp(201-m,3)];
+            % disp('rescaled')
+            % disp(XF)
 
         % Update list of rod points
        %%% newxf = XF(end,:);
         
-        output_BVP = solve_BVP(x0,p0,newxf,tf,params,m,w);
+        output_BVP = solve_BVP(x0,p0,newxf,tf,params,m);
+        %%%%output_BVP = solve_BVP(x0,p0,XF,tf,params,0);
         
         % Before checking for errors, test for sufficient straightness
         % Check that slope in between every 2 consecutive points is 
@@ -112,6 +123,7 @@ for n = 1:1
         
             % Re-update
             p0 = output_BVP.p0;
+            % XF = = output_BVP.x;
             xf = output_BVP.x;
             % disp('after BVP')
             % disp(XF)
@@ -147,13 +159,14 @@ for i = 1:n
         elseif j == m
             maxsize = j;
         end
+    end
 end
 outputlength = maxsize;
 
 for i = 1:outputlength
-    err(:,i) = extractfield(output_tester(:,i),'error')
+    err(:,i) = extractfield(output_tester(:,i),'error');
 end
-err2 = err'
+err2 = err';
 
 % errsavetemp tells us the error at each step
 % errsave(i) tells us result of random p0 #i
@@ -199,8 +212,8 @@ for i = 1:n
     for j = 0:outputlength-1
         last = outputlength-j;
         if ~isempty(output_tester(i,last).endp0)
-            fprintf('last for i = %i \n',i)
-            disp(last)
+%             fprintf('last for i = %i \n',i)
+%             disp(last)
             if contains(errsave(i),'straight')
                 straightend = [straightend; output_tester(i,last).endp0];
             elseif contains(errsave(i),'BVP solver failed')
@@ -216,7 +229,7 @@ for i = 1:n
 end
 
 % End computation time
-toc
+% toc
 
 
 % End of function main_continuation_tester
