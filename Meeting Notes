@@ -65,3 +65,10 @@
 % Decrease number of cuts, maybe to 100
 % Use extensibilty with two methods
 
+% 7/11/19 Plans for final week
+% - Sourcetree: good resource for major merge conflicts
+% - Clean up data: rename files proeprly, delete unnecessary functions,
+%   relabel axes in endp0 figures
+% - Run extensible without weight method 1 and method 2
+% - Make slices of pspace plotting stability and instability
+% - Restrict domain and run more data points
