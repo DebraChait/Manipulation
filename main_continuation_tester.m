@@ -5,7 +5,7 @@ function [output_tester, straightstart, bvpfailstart, lsfailstart,...
 %tic
 w = 5;
 
-for n = 1:10
+for n = 1:100
     
     fprintf('n = %i \n',n);
     
