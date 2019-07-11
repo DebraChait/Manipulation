@@ -5,7 +5,7 @@ function [output_tester, straightstart, bvpfailstart, lsfailstart,...
 %tic
 w = 5;
 
-for n = 1:100
+for n = 1:10
     
     fprintf('n = %i \n',n);
     
@@ -163,7 +163,7 @@ for i = 1:n
     end
     errsave = [errsave,errsavetemp];
 end
-% disp(errsave)
+disp(errsave)
 
 % Sort initial p0 values by error
 bvpfailstart = [];
