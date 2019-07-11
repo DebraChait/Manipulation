@@ -67,6 +67,7 @@
 
 % 7/11/19 Plans for final week
 % - Sourcetree: good resource for major merge conflicts
+% - Run extensible without lsfail
 % - Clean up data: rename files proeprly, delete unnecessary functions,
 %   relabel axes in endp0 figures
 % - Run extensible without weight method 1 and method 2
