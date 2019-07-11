@@ -88,10 +88,10 @@ stablep0nc = [];
     
     % title method 2
     % title('p0 paths ext method 2')
-    name = sprintf('p0 paths plotp0 %i all',i);
+    name = sprintf('p0 paths ext method 2 %i',i);
     title(name);
     
-    legend('stable p0','unstable p0','Location', 'Best')
+    legend('stable complete','stable p0','unstable p0','Location', 'Best')
     xlabel('p_1')
     ylabel('p_2')
     zlabel('p_3')
