@@ -1,4 +1,4 @@
-function diff_eqns_ext(t,Y,params,w) 
+function dY = diff_eqns_ext(t,Y,params,w) 
     % Inputs t=time, Y=vector containing solution at time t
     % Outputs diff eqns to be solved
     % Sets up necessary and suff cond's for local minima

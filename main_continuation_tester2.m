@@ -42,7 +42,7 @@ for n = 1:100
     params = parameters;
 
     % Solve IVP to find stable shape
-    output_IVP = solve_IVP(x0,p0,tf,params,0);
+    output_IVP = solve_IVP(x0,p0,tf,params,0,w);
     % disp('solved IVP');
 
     % Set up for straightening the rod with BVP
@@ -82,7 +82,7 @@ for n = 1:100
         % Update list of rod points
        %%% newxf = XF(end,:);
         
-        output_BVP = solve_BVP(x0,p0,newxf,tf,params,m);
+        output_BVP = solve_BVP(x0,p0,newxf,tf,params,m,w);
         %%%%output_BVP = solve_BVP(x0,p0,XF,tf,params,0);
         
         % Before checking for errors, test for sufficient straightness

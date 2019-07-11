@@ -23,7 +23,7 @@ Y0 = [x0 p0 reshape(M0',1,9) reshape(J0',1,9)];
 % Solve ODEs
 % Without extensibility
 % [t,sol,tconj,~,ie] = ode45(@(t,Y) diff_eqns(t,Y,params,w), [linspace(0,1,201-m)],... 
-                        Y0,params.ode_options);  
+                     %   Y0,params.ode_options);  
 % With extensibility                        
 [t,sol,tconj,~,ie] = ode45(@(t,Y) diff_eqns_ext(t,Y,params,w), ...
     [linspace(0,1,201-m)], Y0,params.ode_options);                           
