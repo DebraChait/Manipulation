@@ -8,10 +8,10 @@ noconjend = [];
 for i = 1:10
     
     % Load the data method 1
-    % filename = sprintf('plotp0_%i',i)
+     filename = sprintf('plotp0extgood_%i',i)
     
     % Load the data method 2
-    filename = sprintf('plotp02extgood_%i',i)
+    % filename = sprintf('plotp02extgood_%i',i)
     
     load(filename,'output_tester')
     
@@ -82,10 +82,10 @@ if ~isempty(conjstart)
         conjstart(:,3), 'or')
 end
 % title method 1
-% title('start p0s conj/noconj')
+ title('start p0s conj/noconj')
 
 % title method 2
-title('start p0s ext conj/noconj method 2')
+% title('start p0s ext conj/noconj method 2')
 
 legend('noconjstart','conjstart','Location', 'Best')
 xlabel('p_1(0)')
@@ -95,22 +95,22 @@ zlabel('p_3(0)')
 figure(2)
 view(3)
 hold on
-if ~isempty(conjend)
-    plot3(conjend(:,1), conjend(:,2), ...
-        conjend(:,3), 'or')
-end
 if ~isempty(noconjend)
     plot3(noconjend(:,1),noconjend(:,2),...
         noconjend(:,3), 'ob')
 end
+if ~isempty(conjend)
+    plot3(conjend(:,1), conjend(:,2), ...
+        conjend(:,3), 'or')
+end
 
 % title method 1
-% title('end p0s conj/noconj')
+ title('end p0s conj/noconj')
 
 % title method 2
-title('end p0s ext conj/noconj method 2')
+% title('end p0s ext conj/noconj method 2')
 
-legend('conjend','noconjend','Location', 'Best')
+legend('noconjend','conjend','Location', 'Best')
 xlabel('p_1(1)')
 ylabel('p_2(1)')
 zlabel('p_3(1)')
