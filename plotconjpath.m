@@ -17,10 +17,10 @@ stablep0nc = [];
 
     
     % Load the data method 1
-    % filename = sprintf('plotp0_%i',i)
+    filename = sprintf('plotp0extgood_%i',i)
     
     % Load the data method 2
-    filename = sprintf('plotp02extgood_%i',i)
+    % filename = sprintf('plotp02extgood_%i',i)
     
     load(filename)
     % load('plotp0_1')
@@ -84,14 +84,14 @@ stablep0nc = [];
     end
     
     % title method 1
-    % title('p0 paths')
+    % title('p0 paths ext method 1')
     
     % title method 2
     % title('p0 paths ext method 2')
-    name = sprintf('p0 paths plotp0 %i all',i);
+    name = sprintf('p0 paths plotp0 ext %i all',i);
     title(name);
     
-    legend('stable p0','unstable p0','Location', 'Best')
+    legend('stable complete', 'stable p0','unstable p0','Location', 'Best')
     xlabel('p_1')
     ylabel('p_2')
     zlabel('p_3')
