@@ -4,7 +4,7 @@ function diff_eqns_ext(t,Y,params,w)
     % Sets up necessary and suff cond's for local minima
     
     % Set extensibility constant ce, bending constant cb, weight w
-    ce = 1;
+    ce = 1000;
     cb = 1;
     % w = 5;
     
