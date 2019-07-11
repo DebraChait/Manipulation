@@ -1,6 +1,8 @@
 function [output_tester,bvpfailstart,lsfailstart,noerrstart,...
     straightstart,bvpfailend,lsfailend,noerrend,straightend] = resort
 
+% resorts data from extensibility case to get lsfailend    
+
 for s = 1:10
     
     filename = sprintf('plotp02_%i',s)
