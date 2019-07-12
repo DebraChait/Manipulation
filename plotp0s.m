@@ -135,10 +135,10 @@ save('endp0extw0nolsf_byerr','noerrenddata')
 figure(1)
 view(3)
 hold on
-% if ~isempty(lsfailstartdata)
-% plot3(lsfailstartdata(:,1),lsfailstartdata(:,2),...
-%              lsfailstartdata(:,3), 'oy')
-% end
+if ~isempty(lsfailstartdata)
+plot3(lsfailstartdata(:,1),lsfailstartdata(:,2),...
+             lsfailstartdata(:,3), 'oy')
+end
 if ~isempty(straightstartdata)
     plot3(straightstartdata(:,1),...
         straightstartdata(:,2),straightstartdata(:,3), 'og')
@@ -152,8 +152,8 @@ if ~isempty(bvpfailstartdata)
         bvpfailstartdata(:,3), 'or')
 end
 title('start p0s ext w=0 method 2')
-% legend('lsfailstart','straightstart',...
-%     'bvpfailstart','noerrstart', 'Location', 'Best')
+legend('lsfailstart','straightstart',...
+    'bvpfailstart','noerrstart', 'Location', 'Best')
 % legend('lsfailstart','straightstart','noerrstart',...
 %     'bvpfailstart','Location', 'Best')
 legend('straightstart','noerrstart','bvpfailstart',...
