@@ -17,7 +17,7 @@ stablep0nc = [];
 
     
     % Load the data method 1
-    filename = sprintf('plotp0extgood_%i',i)
+    filename = sprintf('plotp02ext_nolsf_%i',i)
     
     % Load the data method 2
     % filename = sprintf('plotp02extgood_%i',i)
@@ -88,7 +88,7 @@ stablep0nc = [];
     
     % title method 2
     % title('p0 paths ext method 2')
-    name = sprintf('p0 paths plotp0 ext %i all',i);
+    name = sprintf('p0 paths plotp0 ext no lsf method 2, %i',i);
     title(name);
     
     legend('stable complete', 'stable p0','unstable p0','Location', 'Best')

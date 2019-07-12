@@ -8,7 +8,7 @@ noconjend = [];
 for i = 1:10
     
     % Load the data method 1
-     filename = sprintf('plotp0extgood_%i',i)
+     filename = sprintf('plotp02ext_nolsf_%i',i)
     
     % Load the data method 2
     % filename = sprintf('plotp02extgood_%i',i)
@@ -82,7 +82,7 @@ if ~isempty(conjstart)
         conjstart(:,3), 'or')
 end
 % title method 1
- title('start p0s conj/noconj')
+ title('start p0s ext no lsf conj/noconj method 2')
 
 % title method 2
 % title('start p0s ext conj/noconj method 2')
@@ -105,7 +105,7 @@ if ~isempty(conjend)
 end
 
 % title method 1
- title('end p0s conj/noconj')
+ title('end p0s ext no lsf conj/noconj method 2')
 
 % title method 2
 % title('end p0s ext conj/noconj method 2')
