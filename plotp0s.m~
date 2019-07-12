@@ -129,7 +129,6 @@ end
 [m1,n1] = size([noerrenddata])
 [m2,n2] = size([straightenddata])
 save('startp0extw0nolsf_byerr','noerrstartdata')
-save('endp0extw0nolsf_byerr','noerrenddata')
 
 % Plot the start p0s, colored by error
 figure(1)
@@ -188,7 +187,7 @@ title('end p0s ext w=0 no lsf method 2')
 % legend('lsfailend','straightend','noerrend','bvpfailend',...
 %     'Location', 'Best')
 legend('straightend','noerrend','bvpfailend','Location', 'Best')
-axis([-30 30 -10 10 -3 3])
+axis([-
 xlabel('p_1(0)')
 ylabel('p_2(0)')
 zlabel('p_3(0)')

@@ -81,6 +81,7 @@ if ~isempty(conjstart)
     plot3(conjstart(:,1), conjstart(:,2), ...
         conjstart(:,3), 'or')
 end
+
 % title method 1
  title('start p0s ext no lsf w = 0 conj/noconj')
 
@@ -92,7 +93,7 @@ xlabel('p_1(0)')
 ylabel('p_2(0)')
 zlabel('p_3(0)')
 
-figure(2)
+figure(4)
 view(3)
 hold on
 if ~isempty(noconjend)
@@ -103,13 +104,12 @@ if ~isempty(conjend)
     plot3(conjend(:,1), conjend(:,2), ...
         conjend(:,3), 'or')
 end
-
+axis([-30 30 -10 10 -3 3])
 % title method 1
  title('end p0s ext no lsf w = 0 conj/noconj')
 
 % title method 2
 % title('end p0s ext conj/noconj method 2')
-
 legend('noconjend','conjend','Location', 'Best')
 xlabel('p_1(1)')
 ylabel('p_2(1)')

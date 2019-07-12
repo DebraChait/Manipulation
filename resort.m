@@ -6,7 +6,7 @@ function [output_tester,bvpfailstart,lsfailstart,noerrstart,...
 for s = 1:10
     
     % Method 1
-    filename = sprintf('plotp0patherr_ext_nolsf_%i',s)
+    filename = sprintf('plotp02ext_w0_%i',s)
     load(filename,'output_tester')
     
     % Method 2
@@ -110,7 +110,7 @@ for s = 1:10
     % end of line 74 forloop, endp0 error sort    
     end
     
-    filename2 = sprintf('plotp0patherr_ext_nolsf_%i',s)
+    filename2 = sprintf('plotp02ext_w0good_%i',s)
     save(filename2,'output_tester','straightstart','bvpfailstart',...
         'lsfailstart','noerrstart','straightend','bvpfailend',...
         'lsfailend','noerrend')
