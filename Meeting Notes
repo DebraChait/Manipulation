@@ -73,3 +73,9 @@
 %   relabel axes in endp0 figures
 % - Make slices of pspace plotting stability and instability
 % - Restrict domain and run more data points
+
+% Plots for each data set:
+% - Start and end p0s by error (2 plots)
+% - Start and end p0s by stability (2 plots)
+% - p0 path by error (10 plots, 1 for each set of 100 points)
+% - p0 path by stability (10 plots, 1 for each set of 100 points)

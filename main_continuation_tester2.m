@@ -14,7 +14,7 @@ function [output_tester, straightstart, bvpfailstart, lsfailstart,...
 % Total computation time
 % tic
 
-w = 5;
+w = 0;
 
 % Test n random p0 values for straightening
 for n = 1:100
