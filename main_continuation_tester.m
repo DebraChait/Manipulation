@@ -3,9 +3,9 @@ function [output_tester, straightstart, bvpfailstart, lsfailstart,...
     main_continuation_tester
 
 %tic
-w = 5;
+w = 0;
 
-for n = 1:10
+for n = 1:100
     
     fprintf('n = %i \n',n);
     

@@ -68,7 +68,7 @@ try
         % p0 = p0 + dp0';
 
         % Use line search to find step size that ensures error decreases
-         step = line_search(x0,p0,xf,dp0,tf,output_IVP.err,params,m,w);
+        step = line_search(x0,p0,xf,dp0,tf,output_IVP.err,params,m,w);
 
         % Update p0 with line search for a better guess
         if ~isempty(step)
