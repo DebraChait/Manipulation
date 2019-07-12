@@ -79,3 +79,15 @@
 % - Start and end p0s by stability (2 plots)
 % - p0 path by error (10 plots, 1 for each set of 100 points)
 % - p0 path by stability (10 plots, 1 for each set of 100 points)
+
+% Data sets:
+% - w = 5, inextensible, method 1
+% - w = 5, inextensible, method 2
+% - w = 5, extensible, method 1
+% - w = 5, extensible, method 1, no lsf
+% - w = 5, extensible, method 2
+% - w = 5, extensible, method 2, no lsf
+% - w = 0, extensible, method 1
+% - w = 0, extensible, method 1, no lsf
+% - w = 0, extensible, method 2
+% - w = 0, extensible, method 2, no lsf
