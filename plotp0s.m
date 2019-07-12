@@ -14,7 +14,7 @@ noerrenddata = [];
 for i = 1:10
     
     % Load the data
-    filename = sprintf('plotp0ext_nolsf_%i',i)
+    filename = sprintf('plotp0ext_nolsf_w0_%i',i)
     load(filename) 
     
     straightstartdata = [straightstartdata; straightstart];
@@ -48,7 +48,7 @@ if ~isempty(bvpfailstartdata)
 plot3(bvpfailstartdata(:,1), bvpfailstartdata(:,2), ...
     bvpfailstartdata(:,3), 'or')
 end
-title('start p0s ext no lsf')
+title('start p0s ext no lsf w=0')
 legend('straightstart',...
     'noerrstart', 'bvpfailstart', 'Location', 'Best')
 xlabel('p_1(0)')
@@ -75,7 +75,7 @@ if ~isempty(bvpfailenddata)
 plot3(bvpfailenddata(:,1), bvpfailenddata(:,2), ...
     bvpfailenddata(:,3), 'or')
 end
-title('end p0s ext no lsf')
+title('end p0s ext no lsf w=0')
 legend('straightend',...
      'noerrend', 'bvpfailend', 'Location', 'Best')
 xlabel('p_1(1)')
