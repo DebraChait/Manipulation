@@ -126,19 +126,19 @@ for s = 1:10
     
 % end of s forloop
 end
-[m1,n1] = size([noerrenddata])
-[m2,n2] = size([straightenddata])
-save('startp0extw0nolsf_byerr','noerrstartdata')
-save('endp0extw0nolsf_byerr','noerrenddata')
+% [m1,n1] = size([noerrenddata])
+% [m2,n2] = size([straightenddata])
+% save('startp0extw0nolsf_byerr','noerrstartdata')
+% save('endp0extw0nolsf_byerr','noerrenddata')
 
 % Plot the start p0s, colored by error
 figure(1)
 view(3)
 hold on
-if ~isempty(lsfailstartdata)
-plot3(lsfailstartdata(:,1),lsfailstartdata(:,2),...
-             lsfailstartdata(:,3), 'oy')
-end
+% if ~isempty(lsfailstartdata)
+% plot3(lsfailstartdata(:,1),lsfailstartdata(:,2),...
+%              lsfailstartdata(:,3), 'oy')
+% end
 if ~isempty(straightstartdata)
     plot3(straightstartdata(:,1),...
         straightstartdata(:,2),straightstartdata(:,3), 'og')
@@ -151,9 +151,7 @@ if ~isempty(bvpfailstartdata)
     plot3(bvpfailstartdata(:,1), bvpfailstartdata(:,2), ...
         bvpfailstartdata(:,3), 'or')
 end
-title('start p0s ext w=0 method 2')
-legend('lsfailstart','straightstart',...
-    'bvpfailstart','noerrstart', 'Location', 'Best')
+title('start p0s ext w=0 no lsf method 2')
 % legend('lsfailstart','straightstart','noerrstart',...
 %     'bvpfailstart','Location', 'Best')
 legend('straightstart','noerrstart','bvpfailstart',...
@@ -183,12 +181,11 @@ if ~isempty(bvpfailenddata)
         bvpfailenddata(:,3), 'or')
 end
 title('end p0s ext w=0 no lsf method 2')
-% legend('lsfailend','straightend',...
-%      'bvpfailend','noerrend', 'Location', 'Best')
-% legend('lsfailend','straightend','noerrend','bvpfailend',...
-%     'Location', 'Best')
-legend('straightend','noerrend','bvpfailend','Location', 'Best')
-axis([-30 30 -10 10 -3 3])
+% legend('lsfailend','straightend','noerrend',...
+% 'bvpfailend','Location', 'Best')
+legend('straightend','noerrend',...
+'bvpfailend','Location', 'Best')
+% axis([-30 30 -10 10 -3 3])
 xlabel('p_1(0)')
 ylabel('p_2(0)')
 zlabel('p_3(0)')
