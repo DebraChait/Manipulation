@@ -10,7 +10,7 @@ for s = 1:10
     % For method 1
     % filename = sprintf('plotp0_%i',s)
     % For method 2
-    filename = sprintf('plotp02ext_nolsf_%i',s)
+    filename = sprintf('plotp0ext_nolsf_%i',s)
     load(filename)
     
     for p = 1:100
@@ -93,7 +93,7 @@ for s = 1:10
     % For method 1
     % filename = sprintf('plotp0patherr_%i',s)
     % For method 2
-    filename = sprintf('plotp0patherr_ext2_nolsf_%i',s)
+    filename = sprintf('plotp0patherr_ext_nolsf_%i',s)
     save(filename,'straightp0s','bvpfailp0s','lsfailp0s','noerrp0s')
     
 end

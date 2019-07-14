@@ -8,7 +8,7 @@ noconjend = [];
 for i = 1:10
     
     % Load the data method 1
-     filename = sprintf('plotp02ext_w0_nolsf_%i',i)
+     filename = sprintf('plotp0ext_w0_%i',i)
     
     % Load the data method 2
     % filename = sprintf('plotp02extgood_%i',i)
@@ -73,9 +73,8 @@ for i = 1:10
     
     
 end
-%save('startp0extw0nolsf_alldata','noconjstart')
-%conjstart
-figure(3)
+conjstart;
+figure(1)
 view(3)
 hold on
 if ~isempty(noconjstart)
@@ -88,7 +87,7 @@ if ~isempty(conjstart)
 end
 
 % title method 1
- title('start p0s ext w=0 no lsf conj/noconj method 2')
+ title('start p0s ext no lsf w = 0 conj/noconj')
 
 % title method 2
 % title('start p0s ext conj/noconj method 2')
@@ -111,7 +110,8 @@ if ~isempty(conjend)
 end
 % axis([-30 30 -10 10 -3 3])
 % title method 1
- title('end p0s ext w=0 no lsf conj/noconj method 2')
+ title('end p0s ext no lsf w = 0 conj/noconj')
+
 % title method 2
 % title('end p0s ext conj/noconj method 2')
 legend('noconjend','conjend','Location', 'Best')
