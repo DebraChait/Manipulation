@@ -71,13 +71,13 @@ try
         %step = line_search(x0,p0,xf,dp0,tf,output_IVP.err,params,m,w);
 
         % Update p0 with line search for a better guess
-%         if ~isempty(step)
-%             p0 = p0+step*dp0';
-%         else
-%             % If line search failed, store the specific error
-%             output_BVP.catch = 'line search failed';
-%             error('line search failed')
-%         end
+        if ~isempty(step)
+            p0 = p0+step*dp0';
+        else
+            % If line search failed, store the specific error
+            output_BVP.catch = 'line search failed';
+            error('line search failed')
+        end
 
     end
 

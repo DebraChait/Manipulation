@@ -1,4 +1,4 @@
-function output = plotconjpath
+function [unstablep0,stablep0,stablep0nc] = plotconjpath
 
 % Goal: plot path of one rod's p0s from start through to end
 % Differentiate between stable and unstable p0 locations
@@ -8,7 +8,7 @@ function output = plotconjpath
 % % For plotting all paths, not just ones that have a conj point
 % stablep0nc = [];
 
-for i = 1:10
+for i = 1:1
     
 unstablep0 = [];
 stablep0 = [];
@@ -17,7 +17,7 @@ stablep0nc = [];
 
     
     % Load the data method 1
-    filename = sprintf('plotp0ext_nolsf_%i',i)
+    filename = sprintf('plotp0_%i',i)
     
     % Load the data method 2
     % filename = sprintf('plotp02extgood_%i',i)
@@ -58,7 +58,10 @@ stablep0nc = [];
         
         % end of n forloop
     end
-    
+    disp('stablep0')
+    disp(stablep0)
+    disp('unstablep0')
+    disp(unstablep0)
     % end of i forloop
     %end
     

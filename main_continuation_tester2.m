@@ -14,17 +14,18 @@ function [output_tester, straightstart, bvpfailstart, lsfailstart,...
 % Total computation time
 % tic
 
-w = 0;
+w = 5;
 
 % Test n random p0 values for straightening
-for n = 1:100
+for n = 1:1
     
     fprintf('n = %i \n',n)
 
     % Randomly select a p0 to test
     % First 2 components b/n -30,30 and last b/n -10,10
-    p0 = [30 + (-30 - 30).*rand(1,2), 4 + (-4 - 4).*rand(1)];
+    %p0 = [30 + (-30 - 30).*rand(1,2), 4 + (-4 - 4).*rand(1)];
     % p0 = [24.9850731799204,-0.759932016327859,-6.65729649562770]
+    p0 = [-2.31153446814127,13.0676901265067,-3.80766014303971];
     
     output_tester(n).startp0 = p0;
 
