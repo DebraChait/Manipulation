@@ -3,14 +3,15 @@ function [output_tester, straightstart, bvpfailstart, lsfailstart,...
     main_continuation_tester
 
 %tic
-w = 0;
+w = 5;
 
-for n = 1:100
+for n = 1:1
     
     fprintf('n = %i \n',n);
     
     % Randomly select a p0 between -10 and 10 to test
-    p0 = [30 + (-30 - 30).*rand(1,2), 4 + (-4 - 4).*rand(1)];
+    p0 = [ -9.0795    0.1058   -0.6524] % Unstable
+    % p0 = [30 + (-30 - 30).*rand(1,2), 4 + (-4 - 4).*rand(1)];
     %p0 = [18.41761104	9.501353721	-3.463183167];
     %p0 = [24.9850731799204,-0.759932016327859,-6.65729649562770]
     % Final time

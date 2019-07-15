@@ -38,7 +38,7 @@ try
         % fprintf('iteration: %.0f    error: %.10f \n',i,output_IVP.err)
 
 %         % Plot solution, pause to see starting shape
-%         plot_function(output_IVP,xf)
+         plot_function(output_IVP,xf)
 %         if m==1
 %             pause(1)
 %         end
