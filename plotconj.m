@@ -8,7 +8,7 @@ noconjend = [];
 for i = 1:10
     
     % Load the data method 1
-     filename = sprintf('plotp0ext_w0_%i',i)
+     filename = sprintf('plotp0ext_nolsf_%i',i)
     
     % Load the data method 2
     % filename = sprintf('plotp02extgood_%i',i)
@@ -60,7 +60,11 @@ for i = 1:10
                         last = 1;
                     end
                 end
-                noconjend = [noconjend; output_tester(n,last).endp0];
+                if last == 1
+                    noconjend = [noconjend; output_tester(n,last).startp0];
+                else
+                    noconjend = [noconjend; output_tester(n,last).endp0];
+                end
             end
             
         end
@@ -70,7 +74,7 @@ for i = 1:10
     
 end
 conjstart;
-figure(1)
+figure(3)
 view(3)
 hold on
 if ~isempty(noconjstart)
@@ -83,7 +87,7 @@ if ~isempty(conjstart)
 end
 
 % title method 1
- title('start p0s ext no lsf w = 0 conj/noconj')
+ title('start p0s no lsf w = 5 ext conj/noconj')
 
 % title method 2
 % title('start p0s ext conj/noconj method 2')
@@ -104,15 +108,14 @@ if ~isempty(conjend)
     plot3(conjend(:,1), conjend(:,2), ...
         conjend(:,3), 'or')
 end
-axis([-30 30 -10 10 -3 3])
 % title method 1
- title('end p0s ext no lsf w = 0 conj/noconj')
+ title('end p0s no lsf w = 5 ext conj/noconj')
 
 % title method 2
 % title('end p0s ext conj/noconj method 2')
 legend('noconjend','conjend','Location', 'Best')
-xlabel('p_1(1)')
-ylabel('p_2(1)')
-zlabel('p_3(1)')
+xlabel('p_1(0)')
+ylabel('p_2(0)')
+zlabel('p_3(0)')
 
 end

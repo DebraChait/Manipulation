@@ -74,20 +74,36 @@
 % - Make slices of pspace plotting stability and instability
 % - Restrict domain and run more data points
 
-% Plots for each data set:
+%% Plots for each data set:
 % - Start and end p0s by error (2 plots)
 % - Start and end p0s by stability (2 plots)
 % - p0 path by error (10 plots, 1 for each set of 100 points)
 % - p0 path by stability (10 plots, 1 for each set of 100 points)
 
 % Data sets:
-% - w = 5, inextensible, method 1
+% - w = 5, inextensible, method 1 +
+% - w = 5, extensible, method 1 +
+% - w = 0, extensible, method 1 + 
+% - w = 5, extensible, method 1, no lsf +
+% - w = 0, extensible, method 1, no lsf +
+
 % - w = 5, inextensible, method 2
-% - w = 5, extensible, method 1
-% - w = 5, extensible, method 1, no lsf
 % - w = 5, extensible, method 2
 % - w = 5, extensible, method 2, no lsf
-% - w = 0, extensible, method 1
-% - w = 0, extensible, method 1, no lsf
 % - w = 0, extensible, method 2
 % - w = 0, extensible, method 2, no lsf
+
+%% Meeting 7/12/19
+% Start with p0s that we know are unstable and add extensibility
+% Pick a p0 that causes an upward and downward bell shape and see if that 
+% leads to instabilities with ext
+% Find example where adding updates is less beneficial
+% scale by y^2 p_1(0), 
+%          y^2 p_2(0) -w/2(1 - y^2)
+%          y p_3(0)
+% Run for extensible
+
+% For LSF: Is the intial shape bad since p0 changed a lot? 
+% Look at paths to determine
+
+% Plot p0 paths 

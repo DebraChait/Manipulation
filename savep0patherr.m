@@ -8,9 +8,9 @@ noerrp0s = [];
 for s = 1:10
     
     % For method 1
-    % filename = sprintf('plotp0_%i',s)
+     filename = sprintf('plotp0_%i',s)
     % For method 2
-    filename = sprintf('plotp0ext_nolsf_%i',s)
+    % filename = sprintf('plotp0ext_nolsf_%i',s)
     load(filename)
     
     for p = 1:100
