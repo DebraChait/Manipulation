@@ -1,4 +1,4 @@
-function output = plotconjpath
+function [unstablep0,stablep0,stablep0nc] = plotconjpath
 
 % Goal: plot path of one rod's p0s from start through to end
 % Differentiate between stable and unstable p0 locations
@@ -58,7 +58,10 @@ stablep0nc = [];
         
         % end of n forloop
     end
-    
+    disp('stablep0')
+    disp(stablep0)
+    disp('unstablep0')
+    disp(unstablep0)
     % end of i forloop
     %end
     disp('stablep0')

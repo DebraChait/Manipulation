@@ -1,11 +1,11 @@
 function output = main_IVP_solver
-
+m=0;
 % Set weight
 w = 0;
 
 % Initial conditions for x and p
 x0 = [0 0 0];
-p0 = [-100 2 4*pi];
+p0 = [0 0 -1];
 
 % Final time
 tf = 1;
