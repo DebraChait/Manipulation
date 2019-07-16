@@ -270,10 +270,8 @@ p0 = p0full(n,:)
      
     % End of straightening loop m for a specific random p0
     end
-disp('error')
-disp(output_tester(n,m).error)
-% End of random p0 loop n
-end    
+
+    
 
 % Save errors 
 maxsize = 0;
@@ -292,12 +290,13 @@ for i = 1:n
 outputlength = maxsize;
 
 for i = 1:outputlength
+    extractfield(output_tester(:,i),'error')
     err(:,i) = extractfield(output_tester(:,i),'error');
 end
-err2 = err';
+err2 = err'
 
 disp('last error')
-disp(err2(end,:))
+disp(err2(end,1))
 
 
 % errsavetemp tells us the error at each step
