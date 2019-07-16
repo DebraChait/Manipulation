@@ -11,8 +11,13 @@ for n = 1:1
     
     % Randomly select a p0 between -10 and 10 to test
     % p0 = [30 + (-30 - 30).*rand(1,2), 4 + (-4 - 4).*rand(1)];
-    %p0 = [-2.31153446814127,13.0676901265067,-3.80766014303971];
-    p0 = [14.2713   27.3328   -2.0395];
+    
+    % p0 = [-2.31153446814127,13.0676901265067,-3.80766014303971];
+    % p0 = [-2.3989  -12.4150   -3.9959];
+    % p0 = [-74.6770740345762,0.0472214499814133,-0.0668704122455366];
+    % p0 = [-11.5909115781575,-1.41852696482142,-0.635146284773637];
+    % p0 = [-53.7853953739189,2.50000396557782,9.78090610625897];
+    p0 = [-65.5313497747798,2.50000986510598,13.0128364272750];
     
     % Final time
     tf = 1;
@@ -56,6 +61,7 @@ for n = 1:1
         output_tester(n,m).xf = newxf;
         output_BVP = solve_BVP(x0,p0,newxf,tf,params,m,w);
         
+        
         % Before checking for errors, test for sufficient straightness
         % Check that the slope in between every 2 consecutive points is
         % close to 0
@@ -88,15 +94,6 @@ for n = 1:1
         % straightening, or if no errors
         output_tester(n,m).error = output_BVP.catch;
         m;
-        %disp(output_tester(n,m).error)
-        
-        % if contains(output_tester(n,m).error,'BVP solver failed')
-        % disp('new xf')
-        % disp(newxf)
-        % disp(norm([newxf(1) newxf(2)]))
-        % output_tester(n,199).error = 'BVP solver failed';
-        % end
-        
         
         try
             % Re-update

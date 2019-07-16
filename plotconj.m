@@ -8,7 +8,7 @@ noconjend = [];
 for i = 1:10
     
     % Load the data method 1
-     filename = sprintf('plotp0ext_nolsf_%i',i)
+     filename = sprintf('plotp0_%i',i)
     
     % Load the data method 2
     % filename = sprintf('plotp02extgood_%i',i)
@@ -73,7 +73,7 @@ for i = 1:10
     
     
 end
-conjstart;
+conjstart
 figure(3)
 view(3)
 hold on
