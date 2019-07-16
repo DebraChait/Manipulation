@@ -10,11 +10,14 @@ for n = 1:1
     fprintf('n = %i \n',n);
     
     % Randomly select a p0 between -10 and 10 to test
-
-    p0 = [ -9.0795    0.1058   -0.6524] % Unstable
+    % p0 = [-53.7853953739189,2.50000396557782,9.78090610625897]
     % p0 = [30 + (-30 - 30).*rand(1,2), 4 + (-4 - 4).*rand(1)];
     %p0 = [18.41761104	9.501353721	-3.463183167];
     %p0 = [24.9850731799204,-0.759932016327859,-6.65729649562770]
+    
+    % p0s with instabilities before ext and w/o after ext
+    % p0 = [-8.1946   -4.2535   -3.4169]
+    % 
 
     % Final time
     tf = 1;
@@ -166,7 +169,7 @@ for i = 1:n
     end
     errsave = [errsave,errsavetemp];
 end
-% disp(errsave)
+ disp(errsave)
 
 % Sort initial p0 values by error
 bvpfailstart = [];
