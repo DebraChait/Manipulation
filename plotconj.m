@@ -8,7 +8,7 @@ noconjend = [];
 for i = 1:10
     
     % Load the data method 1
-     filename = sprintf('plotp02good_%i',i)
+     filename = sprintf('plotp0_%i',i)
     
     % Load the data method 2
     % filename = sprintf('plotp02extgood_%i',i)

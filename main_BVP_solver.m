@@ -10,7 +10,7 @@ tf = 1;
 x0 = [0 0 0];
 
 % Desired boundary condition for x(tf)
-xf = [0.5 0 0]
+xf = [.25 0 0]
 
 % Parameters vector
 params = parameters;

@@ -56,6 +56,8 @@ stablep0nc = [];
             stablep0nc = [stablep0nc; stablenow];
         end
         
+        
+        
         % end of n forloop
     end
     disp('stablep0')

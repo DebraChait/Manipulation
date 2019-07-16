@@ -24,7 +24,7 @@ for i = [0:5:10, 20:20:120]
     notstraightp0 = [];
     % Save paths of sandwich and end unstable
     sandwichp0 = [];
-    endunstable = [];
+    endunstable = [];    
     
     % set random p0s on the shell of an ellipse
     r=randn(3000);
@@ -43,6 +43,8 @@ for i = [0:5:10, 20:20:120]
     for j = 1:3000
         
         p0 = [x(j), y(j), z(j)];
+%         unstablep0now = [];
+%         stablep0now = [];
         p0path = [];
         hitunstable = 0;
         
@@ -63,8 +65,8 @@ for i = [0:5:10, 20:20:120]
 %                         (k+.01)*p0now(3)];
 %                     next_output_IVP = solve_IVP(x0,nextp0,tf,params,m,w);
 %                     if ~isempty(next_output_IVP.tconj)
-%                         % Add that line of p0s to sandwichp0
-%                         sandwichp0 = [sandwichp0; p0path];
+%                        % Add that line of p0s to sandwichp0 
+%                        sandwichp0 = [sandwichp0; p0path]; 
 %                     end
 %                 end
                 % Check if it ends unstable
@@ -81,7 +83,7 @@ for i = [0:5:10, 20:20:120]
             
             
             % Check if this is a straight p0
-            XF = output_IVP.x;
+            XF = output_IVP.x; 
             suffstraight = 1;
             suff = .005;
             goal = [1,0,0];
@@ -105,17 +107,17 @@ for i = [0:5:10, 20:20:120]
                 notstraightp0 = [notstraightp0; output_IVP.p];
             end
             
-            % end of k forloop
+        % end of k forloop
         end
         
-        %         if ~isempty(unstablep0now)
-        %             unstablep0 = [unstablep0; unstablep0now];
-        %         end
-        %         if ~isempty(stablep0now)
-        %             stablep0 = [stablep0; stablep0now];
-        %         end
+%         if ~isempty(unstablep0now)
+%             unstablep0 = [unstablep0; unstablep0now];
+%         end
+%         if ~isempty(stablep0now)
+%             stablep0 = [stablep0; stablep0now];
+%         end
         
-        % end of j forloop
+    % end of j forloop
     end
     
     % save data for plotting

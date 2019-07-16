@@ -24,12 +24,11 @@ Y0 = [x0 p0 reshape(M0',1,9) reshape(J0',1,9)];
 % Without extensibility
 % [t,sol,tconj,~,ie] = ode45(@(t,Y) diff_eqns(t,Y,params,w), [linspace(0,1,201-m)],... 
 %                        Y0,params.ode_options);  
-
 % With extensibility                        
 [t,sol,tconj,~,ie] = ode45(@(t,Y) diff_eqns_ext(t,Y,params,w), ...
-    [linspace(0,1,201-m)], Y0,params.ode_options);    
-%                         @ tells Matlab which parameters to use and which
-%                         to ignore. Matlab really only wants t,Y
+    [linspace(0,1,201-m)], Y0,params.ode_options);                           
+                        % @ tells Matlab which parameters to use and which
+                        % to ignore. Matlab really only wants t,Y
 % ode45 input(system of diff eqs to solve, [start end], initial cond, 
 % extra input for error tolerance and to get conjugate points)
 % linspace discretizes rod length 1 into 201-m points from 0 to 1
