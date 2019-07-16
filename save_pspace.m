@@ -10,9 +10,9 @@ tf = 1;
 m = 0;
 
 % set random weights
-for i = [0:5:10, 20:20:120]
+for i = [0:5:10, 20:20:120] 
     
-    w = i;
+    w = i
     
     stablep0 = [];
     unstablep0 = [];
