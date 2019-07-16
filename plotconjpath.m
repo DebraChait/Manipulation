@@ -66,6 +66,10 @@ stablep0nc = [];
     disp(unstablep0)
     % end of i forloop
     %end
+    disp('stablep0')
+    disp(stablep0)
+    disp('unstablep0')
+    disp(unstablep0)
     
     % plot it all at the end
     % For plotting all paths and not just ones with conj pts, move end of i loop

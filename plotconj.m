@@ -73,7 +73,8 @@ for i = 1:10
     
     
 end
-conjstart
+disp('conjstart')
+disp(conjstart)
 figure(3)
 view(3)
 hold on
@@ -87,10 +88,10 @@ if ~isempty(conjstart)
 end
 
 % title method 1
- title('start p0s no lsf w = 5 ext conj/noconj')
+% title('start p0s no lsf w = 5 ext conj/noconj')
 
 % title method 2
-% title('start p0s ext conj/noconj method 2')
+ title('start p0s ext conj/noconj method 2')
 
 legend('noconjstart','conjstart','Location', 'Best')
 xlabel('p_1(0)')
@@ -109,10 +110,10 @@ if ~isempty(conjend)
         conjend(:,3), 'or')
 end
 % title method 1
- title('end p0s no lsf w = 5 ext conj/noconj')
+% title('end p0s no lsf w = 5 ext conj/noconj')
 
 % title method 2
-% title('end p0s ext conj/noconj method 2')
+ title('end p0s ext conj/noconj method 2')
 legend('noconjend','conjend','Location', 'Best')
 xlabel('p_1(0)')
 ylabel('p_2(0)')

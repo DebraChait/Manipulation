@@ -97,6 +97,7 @@
 % Start with p0s that we know are unstable and add extensibility
 % Pick a p0 that causes an upward and downward bell shape and see if that 
 % leads to instabilities with ext
+
 % Find example where adding updates is less beneficial
 % scale by y^2 p_1(0), 
 %          y^2 p_2(0) -w/2(1 - y^2)

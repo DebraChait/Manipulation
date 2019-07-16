@@ -14,7 +14,7 @@ plot(xf(1),xf(2),'ro')
 hold off
 
 % Set axis limits
-axis([-.5 1 -1 1])
+axis([-.5 1.5 -1 1])
 % Axis labels
 xlabel('x_1')
 ylabel('x_2')
