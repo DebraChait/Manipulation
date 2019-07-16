@@ -37,7 +37,7 @@ for i = [0:5:10, 20:20:120]
         
         for k = 0:.01:1
         
-            p0now = [(k^2)*p0(1), (k^2)*p0(2) -w/2(1 - k^2), k*p0(3)];
+            p0now = [(k^2)*p0(1), (k^2)*p0(2) -w/2*(1 - k^2), k*p0(3)];
             output_IVP = solve_IVP(x0,p0now,tf,params,m,w);
 
             % Check if there's a tconj
@@ -54,7 +54,7 @@ for i = [0:5:10, 20:20:120]
     end
     
 % save data for plotting
-filename = sprintf('pspacedata_w%i_range%i%i%i',w,xrange,...
+filename = sprintf('pspacedata_w%i_ext_range%i%i%i',w,xrange,...
     yrange,zrange);
 save(filename,'unstablep0','stablep0');
 
