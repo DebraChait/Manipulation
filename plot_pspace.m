@@ -1,4 +1,4 @@
-function output = plot_ pspace
+function output = plot_pspace
 
 % Take in stability and straightness arrays, plot staight/not straight and
 % stable/unstable in different colors.
@@ -10,7 +10,7 @@ function output = plot_ pspace
 % plot
 
 
-for i = [0:5:10 , 20:20:120]
+for i = [5]
     
     unstable = [];
     stable = [];
@@ -28,23 +28,23 @@ for i = [0:5:10 , 20:20:120]
     for col = 1:3000
         for row = 1:101
             if stability(row,col) == 0
-                stable = [stable; p0paths{row,col}]
+                stable = [stable; p0paths{row,col}];
             else
-                unstable = [unstable; p0paths{row,col}]
+                unstable = [unstable; p0paths{row,col}];
             end
             
             if straightness(row,col) == 0
-                notstraight = [notstraight; p0paths{row,col}]
+                notstraight = [notstraight; p0paths{row,col}];
             else
-                straight = [straight; p0paths{row,col}]
+                straight = [straight; p0paths{row,col}];
             end
         end
         
         if sandwich(1,col) == 1
-            sandwichp0s = [sandwichp0s; p0paths{:,col}]
+            sandwichp0s = [sandwichp0s; p0paths{:,col}];
         end
         if endunstable(1,col) == 1
-            endunstablep0s = [endunstablep0s; p0paths{:,col}]
+            endunstablep0s = [endunstablep0s; p0paths{:,col}];
         end
     end
     
