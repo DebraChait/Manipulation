@@ -97,15 +97,19 @@ hold off
 figure(3)
 view(3)
  hold on
-    if ~isempty(sandwichp0s)
-        plot3(sandwichp0s(:,1), sandwichp0s(:,2), ...
-            sandwichp0s(:,3), '.b')
+    if ~isempty(sandwichp0s_u)
+        plot3(sandwichp0s_u(:,1), sandwichp0s_u(:,2), ...
+            sandwichp0s_u(:,3), '.r')
+    end
+    if ~isempty(sandwichp0s_s)
+        plot3(sandwichp0s_s(:,1), sandwichp0s_s(:,2), ...
+            sandwichp0s_s(:,3), '.b')
     end
 
     name = sprintf('pspace sandwich p0s w = %i',i);
     title(name);
     
-    legend('p0','Location', 'Best')
+    legend('unstable p0','stable p0','Location', 'Best')
     xlabel('p_1')
     ylabel('p_2')
     zlabel('p_3')
@@ -114,15 +118,19 @@ hold off
 figure(4)
 view(3)
  hold on
-    if ~isempty(endunstablep0s)
-        plot3(endunstablep0s(:,1), endunstablep0s(:,2), ...
-            endunstablep0s(:,3), '.b')
+    if ~isempty(endunstablep0s_u)
+        plot3(endunstablep0s_u(:,1), endunstablep0s_u(:,2), ...
+            endunstablep0s_u(:,3), '.r')
+    end
+    if ~isempty(endunstablep0s_s)
+        plot3(endunstablep0s_s(:,1), endunstablep0s_s(:,2), ...
+            endunstablep0s_s(:,3), '.b')
     end
 
     name = sprintf('pspace ends unstable w = %i',i);
     title(name);
     
-    legend('p0s','Location', 'Best')
+    legend('unstable p0','stable p0','Location', 'Best')
     xlabel('p_1')
     ylabel('p_2')
     zlabel('p_3')

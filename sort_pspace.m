@@ -1,6 +1,7 @@
-function [unstable,stable,straight,notstraight,sandwichp0s,...
-    endunstablep0s, countu, countsb, countsr, countnsr,...
-    countsw, counte] = sort_pspace
+function [unstable, stable, straight, notstraight, sandwichp0s,...
+    endunstablep0s, sandwichp0s_u, sandwichp0s_s, endunstablep0s_u,...
+    endunstablep0s_s, countu, countsb, countsr, countnsr, countsw,...
+    counte, countsw_u, countsw_s, counte_u, counte_s] = sort_pspace
 
 % Goals:
 % Run IVP on p0s of each path
@@ -20,6 +21,8 @@ m = 0;
 for i = 5
     
     w = i
+    
+%%%%%    
     
 %     % Load data
 %     filename = sprintf('pspacedata_ext_w%i_raw',w);
@@ -93,6 +96,8 @@ for i = 5
 %     
 %     sort = sprintf('pspacedata_ext_w%i_key',i);
 %     save(sort)
+
+%%%%
     
     load('pspacedata_ext_w5_key')
     
@@ -104,12 +109,22 @@ for i = 5
     sandwichp0s = zeros(303000,3);
     endunstablep0s = zeros(303000,3);
     
+    sandwichp0s_u = zeros(303000,3);
+    sandwichp0s_s = zeros(303000,3);
+    endunstablep0s_u = zeros(303000,3);
+    endunstablep0s_s = zeros(303000,3);
+    
     countu = 0;
     countsb = 0;
     countsr = 0;
     countnsr =0;
     countsw = 0;
     counte = 0;
+    
+    countsw_u = 0;
+    countsw_s = 0;
+    counte_u = 0;
+    counte_s = 0;
 
 %     unstable = [];
 %     stable = [];
@@ -150,6 +165,35 @@ for i = 5
                 endunstablep0s(counte,:) = p0paths{r,col};
             end
         end
+        
+        %%% Differentiate between un/stable in sandwich and endunstable
+        if sandwich(1,col) == 1
+            for r = 1:101
+                if stability(r,col) == 0
+                    % add to sandwichp0s_s
+                    countsw_s = countsw_s + 1;
+                    sandwichp0s_s(countsw_s,:) = p0paths{r,col};
+                else
+                    % add to sandwichp0s_u
+                    countsw_u = countsw_u + 1;
+                    sandwichp0s_u(countsw_u,:) = p0paths{r,col};
+                end
+            end
+        end
+        if endunstable(1,col) == 1
+           for r = 1:101
+              if stability(r,col) == 0
+                  % add to endunstablep0s_s
+                  counte_s = counte_s + 1;
+                  endunstablep0s_s(counte_s,:) = p0paths{r,col};
+              else
+                 % add to endunstablep0s_u 
+                 counte_u = counte_u + 1;
+                 endunstablep0s_u(counte_u,:) = p0paths{r,col};
+              end
+           end
+        end
+        
     end
     
     sort = sprintf('pspacedata_ext_w%i_sorted',i);
