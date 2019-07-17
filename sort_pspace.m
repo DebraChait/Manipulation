@@ -1,4 +1,5 @@
-function [stability,straightness,sandwich,endunstable] = sort_pspace
+function [unstable,stable,straight,notstraight,sandwichp0s,...
+    endunstablep0s] = sort_pspace
 
 % Goals:
 % Run IVP on p0s of each path
@@ -90,6 +91,47 @@ for i = 5
     end
     
     sort = sprintf('pspacedata_ext_w%i_key',i);
+    save(sort)
+    
+    load('pspacedata_ext_w5_key')
+    
+    % Initialize to preallocate storage, runs faster
+    unstable = zeros(303000,3);
+    stable = zeros(303000,3);
+    straight = zeros(303000,3);
+    notstraight = zeros(303000,3);
+    sandwichp0s = zeros(303000,3);
+    endunstablep0s = zeros(303000,3);
+    
+    for col = 1:3000
+        col
+        for row = 1:101
+            if stability(row,col) == 0
+                stable = [stable; p0paths{row,col}];
+            else
+                unstable = [unstable; p0paths{row,col}];
+            end
+            
+            if straightness(row,col) == 0
+                notstraight = [notstraight; p0paths{row,col}];
+            else
+                straight = [straight; p0paths{row,col}];
+            end
+        end
+        
+        if sandwich(1,col) == 1
+            for r = 1:101
+                sandwichp0s = [sandwichp0s; p0paths{r,col}];
+            end
+        end
+        if endunstable(1,col) == 1
+            for r = 1:101
+                endunstablep0s = [endunstablep0s; p0paths{r,col}];
+            end
+        end
+    end
+    
+    sort = sprintf('pspacedata_ext_w%i_sorted',i);
     save(sort)
 
 % end of i forloop    
