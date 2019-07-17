@@ -12,41 +12,8 @@ function output = plot_pspace
 
 for i = [5]
     
-    unstable = [];
-    stable = [];
-    straight = [];
-    notstraight = [];
-    sandwichp0s =[];
-    endunstablep0s =[];
-    
-    
-    filename = sprintf('pspacedata_ext_w%i_key',i)
+    filename = sprintf('pspacedata_ext_w%i_sorted',i)
     load(filename)
-    filename = sprintf('pspacedata_ext_w%i_raw',i)
-    load(filename)
-    
-    for col = 1:3000
-        for row = 1:101
-            if stability(row,col) == 0
-                stable = [stable; p0paths{row,col}];
-            else
-                unstable = [unstable; p0paths{row,col}];
-            end
-            
-            if straightness(row,col) == 0
-                notstraight = [notstraight; p0paths{row,col}];
-            else
-                straight = [straight; p0paths{row,col}];
-            end
-        end
-        
-        if sandwich(1,col) == 1
-            sandwichp0s = [sandwichp0s; p0paths{:,col}];
-        end
-        if endunstable(1,col) == 1
-            endunstablep0s = [endunstablep0s; p0paths{:,col}];
-        end
-    end
     
 % Stability plot 
 figure(1)
