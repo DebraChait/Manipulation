@@ -94,8 +94,8 @@ for i = 5
     % end of col forloop    
     end
     
-    sort = sprintf('pspacedata_ext_w%i_key',i);
-    save(sort)
+    sortkey = sprintf('pspacedata_ext_w%i_key',i);
+    save(sortkey)
 
 %%%%
     
