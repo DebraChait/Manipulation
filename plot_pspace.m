@@ -76,10 +76,10 @@ hold off
 figure(2)
 view(3)
  hold on
-    if ~isempty(notstraight)
-        plot3(notstraight(:,1), notstraight(:,2), ...
-            notstraight(:,3), '.b')
-    end
+%     if ~isempty(notstraight)
+%         plot3(notstraight(:,1), notstraight(:,2), ...
+%             notstraight(:,3), '.b')
+%     end
     if ~isempty(straight)
         plot3(straight(:,1),straight(:,2),...
             straight(:,3), '.g')
@@ -88,7 +88,7 @@ view(3)
     name = sprintf('pspace straightness w = %i',i);
     title(name);
     
-    legend('notstraight', 'straight','Location', 'Best')
+    legend('straight','Location', 'Best')
     xlabel('p_1')
     ylabel('p_2')
     zlabel('p_3')
