@@ -13,8 +13,27 @@ tf = 1;
 m = 0;
 
 % set random weights
-for i = [0:5:10, 20:20:120]
+parfor o = 1:9
     
+    if o == 1
+        i = 0;
+    elseif o == 2
+        i = 5;
+    elseif o == 3
+        i = 10;
+    elseif o == 4
+        i = 20;
+    elseif o == 5
+        i = 40;
+    elseif o == 6
+        i = 60;
+    elseif o == 7
+        i = 80;
+    elseif o == 8
+        i = 100;
+    elseif o == 9
+        i = 120;
+    end;
     w = i
     
     % Save points that are un/stable not/straight
@@ -42,13 +61,16 @@ for i = [0:5:10, 20:20:120]
     
     for j = 1:3000
         
+        fprintf('w = %i, j = %i \n', w,j)
+        
         p0 = [x(j), y(j), z(j)];
         p0path = [];
         hitunstable = 0;
         
         for k = 0:.01:1
             
-            p0now = [(k^2)*p0(1), (k^2)*p0(2)-w/2*(1 - k^2), k*p0(3)];
+            p0now = [(k^2)*p0(1), (k^2)*p0(2), k*p0(3)];
+            % p0now = [(k^2)*p0(1), (k^2)*p0(2)-w/2*(1 - k^2), k*p0(3)];
             p0path = [p0path; p0now];
             output_IVP = solve_IVP(x0,p0now,tf,params,m,w);
             
@@ -119,7 +141,7 @@ for i = [0:5:10, 20:20:120]
     end
     
     % save data for plotting
-    filename = sprintf('pspacedata_w%i_ext',w);
+    filename = sprintf('pspacedata_w%i',w);
     save(filename);
     
     % end of i forloop
