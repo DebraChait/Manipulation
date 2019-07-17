@@ -114,17 +114,17 @@ for i = 5
     endunstablep0s_u = zeros(303000,3);
     endunstablep0s_s = zeros(303000,3);
     
-    countu = 0;
-    countsb = 0;
-    countsr = 0;
-    countnsr =0;
-    countsw = 0;
-    counte = 0;
+    countu = 0; % unstable
+    countsb = 0; % stable
+    countsr = 0; % straight
+    countnsr =0; % not straight
+    countsw = 0; % sandwich
+    counte = 0; % endunstable
     
-    countsw_u = 0;
-    countsw_s = 0;
-    counte_u = 0;
-    counte_s = 0;
+    countsw_u = 0; % sandwich, unstable
+    countsw_s = 0; % sandwich, stable
+    counte_u = 0; % endunstable, unstable
+    counte_s = 0; % endunstable, stable
 
 %     unstable = [];
 %     stable = [];
