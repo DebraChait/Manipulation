@@ -10,7 +10,7 @@ function output = plot_pspace
 % plot
 %help
 
-for i = [5]
+for i = 5
     
 %     unstable = [];
 %     stable = [];
@@ -114,9 +114,9 @@ hold off
 figure(4)
 view(3)
  hold on
-    if ~isempty(endunstable)
-        plot3(endunstable(:,1), endunstable(:,2), ...
-            endunstable(:,3), '.b')
+    if ~isempty(endunstablep0s)
+        plot3(endunstablep0s(:,1), endunstablep0s(:,2), ...
+            endunstablep0s(:,3), '.b')
     end
 
     name = sprintf('pspace ends unstable w = %i',i);
