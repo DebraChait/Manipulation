@@ -1,26 +1,95 @@
-function output = plot_pspace
+function output = plot_ pspace
 
-load('pspacedata_w5_range50504')
+% Take in stability and straightness arrays, plot staight/not straight and
+% stable/unstable in different colors.
+% Make sandwiches red
 
+% find entries with 1 in stability/straightness arrays -> the index of the
+% p0 where interesting things happened
+% Save as stable/unstable, straight/not straight as individual arrays to
+% plot
+
+
+for i = [0:5:10 , 20:20:120]
+    
+    unstable = [];
+    stable = [];
+    straight = [];
+    notstraight = [];
+    sandwichp0s =[];
+    endunstablep0s =[];
+    
+    
+    filename = sprintf('pspacedata_ext_w%i_key',i)
+    load(filename)
+    filename = sprintf('pspacedata_ext_w%i_raw',i)
+    load(filename)
+    
+    for col = 1:3000
+        for row = 1:101
+            if stability(row,col) == 0
+                stable = [stable; p0paths{row,col}]
+            else
+                unstable = [unstable; p0paths{row,col}]
+            end
+            
+            if straightness(row,col) == 0
+                notstraight = [notstraight; p0paths{row,col}]
+            else
+                straight = [straight; p0paths{row,col}]
+            end
+        end
+        
+        if sandwich(1,col) == 1
+            sandwichp0s = [sandwichp0s; p0paths{:,col}]
+        end
+        if endunstable(1,col) == 1
+            endunstablep0s = [endunstablep0s; p0paths{:,col}]
+        end
+    end
+    
+% Stability plot 
 figure(1)
 view(3)
-hold on
-if ~isempty(stablep0)
-    plot3(stablep0(:,1),stablep0(:,2),...
-             stablep0(:,3), '.b') 
-end
-if ~isempty(unstablep0)
-plot3(unstablep0(:,1), unstablep0(:,2), ...
-    unstablep0(:,3), '.r')
-end
-% title method 1
-name = sprintf('p0 space, w = %i, range = %i,%i,%i',i,...
-    xrange,yrange,zrange);
-title(name);
+ hold on
+    if ~isempty(stable)
+        plot3(stable(:,1), stable(:,2), ...
+            stable(:,3), '.b')
+    end
+    if ~isempty(unstable)
+        plot3(unstable(:,1),unstable(:,2),...
+            unstable(:,3), '.r')
+    end
 
-legend('stable p0','unstable p0','Location', 'Best')
-xlabel('p_1')
-ylabel('p_2')
-zlabel('p_3')
+    name = sprintf('pspace stability w = %i',i);
+    title(name);
+    
+    legend('stable', 'unstable','Location', 'Best')
+    xlabel('p_1')
+    ylabel('p_2')
+    zlabel('p_3')
+hold off
 
+figure(2)
+view(3)
+ hold on
+    if ~isempty(notstraight)
+        plot3(notstraight(:,1), notstraight(:,2), ...
+            notstraight(:,3), '.b')
+    end
+    if ~isempty(straight)
+        plot3(straight(:,1),straight(:,2),...
+            straight(:,3), '.g')
+    end
+
+    name = sprintf('pspace straightness w = %i',i);
+    title(name);
+    
+    legend('notstraight', 'straight','Location', 'Best')
+    xlabel('p_1')
+    ylabel('p_2')
+    zlabel('p_3')
+hold off
+    
+    
 end
