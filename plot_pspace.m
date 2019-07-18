@@ -20,7 +20,7 @@ function output = plot_pspace
 % w = 120, 2449 paths with sandwiches
 
 
-for i = 20
+for i = 120
     
     sort = sprintf('pspacedata_w%i_sorted',i);
     load(sort)
@@ -80,7 +80,7 @@ for i = 20
             unstableplot(:,3), '.r')
     end
     
-    name = sprintf('pspace stability w = %i ext',i);
+    name = sprintf('pspace stability w = %i',i);
     title(name);
     
     legend('stable', 'unstable','Location', 'Best')
@@ -100,7 +100,7 @@ for i = 20
             unstableplot(:,3), '.r')
     end
     
-    name = sprintf('pspace unstable w = %i ext',i);
+    name = sprintf('pspace unstable w = %i',i);
     title(name);
     
     legend('unstable','Location', 'Best')
@@ -124,7 +124,7 @@ for i = 20
             straightplot(:,3), '.g')
     end
     
-    name = sprintf('pspace straight w = %i ext',i);
+    name = sprintf('pspace straight w = %i',i);
     title(name);
     
     legend('straight','Location', 'Best')
@@ -148,7 +148,7 @@ for i = 20
             endunstable_splot(:,3), '.b')
     end
     
-    name = sprintf('pspace ends unstable w = %i ext',i);
+    name = sprintf('pspace ends unstable w = %i',i);
     title(name);
     
     legend('unstable p0','stable p0','Location', 'Best')
@@ -172,7 +172,7 @@ for i = 20
             sandwich_splot(:,3), '.b')
     end
     
-    name = sprintf('pspace sandwich p0s w = %i ext',i);
+    name = sprintf('pspace sandwich p0s w = %i',i);
     title(name);
     
     legend('unstable p0','stable p0','Location', 'Best')

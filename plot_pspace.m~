@@ -7,8 +7,20 @@ function output = plot_pspace
 % Sandwich notes inextensible
 % w = 5, 1 path
 % w = 10, 1 path
+% find entries with 1 in stability/straightness arrays -> the index of the
+% p0 where interesting things happened
+% Save as stable/unstable, straight/not straight as individual arrays to
+% plot help
 
-for i = 0
+% Sandwich notes: First sandwich at w = 60
+% - No straights with sandwiches
+% w = 60, 17 paths with sandwiches
+% w = 80, 157 paths with sandwiches
+% w = 100, 2501 paths with sanwiches
+% w = 120, 2449 paths with sandwiches
+
+
+for i = 10
     
     sort = sprintf('pspacedata_w%i_sorted',i);
     load(sort)
@@ -120,8 +132,8 @@ for i = 0
     ylabel('p_2')
     zlabel('p_3')
     
-    figname = sprintf('pspace_straight_w%i.fig',i)
-    savefig(figname)
+    figname3 = sprintf('pspace_straight_w%i.fig',i)
+    savefig(figname3)
     hold off
     
     figure(4)
@@ -144,8 +156,8 @@ for i = 0
     ylabel('p_2')
     zlabel('p_3')
     
-    figname = sprintf('pspace_endunstable_w%i.fig',i)
-    savefig(figname)
+    figname4 = sprintf('pspace_endunstable_w%i.fig',i)
+    savefig(figname4)
     hold off
     
     figure(5)
@@ -168,8 +180,8 @@ for i = 0
     ylabel('p_2')
     zlabel('p_3')
     
-    figname = sprintf('pspace_sandwich_w%i.fig',i)
-    savefig(figname)
+    figname5 = sprintf('pspace_sandwich_w%i.fig',i)
+    savefig(figname5)
     hold off
     
 end
