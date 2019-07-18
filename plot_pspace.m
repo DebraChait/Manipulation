@@ -7,10 +7,17 @@ function output = plot_pspace
 % find entries with 1 in stability/straightness arrays -> the index of the
 % p0 where interesting things happened
 % Save as stable/unstable, straight/not straight as individual arrays to
-% plot
-%help
+% plot help
 
-for i = 0
+% Sandwich notes: First sandwich at w = 60
+% - No straights with sandwiches
+% w = 60, 17 paths with sandwiches
+% w = 80, 157 paths with sandwiches
+% w = 100, 2501 paths with sanwiches
+% w = 120, 2449 paths with sandwiches
+
+
+for i = 120
     
     sort = sprintf('pspacedata_ext_w%i_sorted',i);
     load(sort)
@@ -71,7 +78,7 @@ for i = 0
             unstableplot(:,3), '.r')
     end
     
-    name = sprintf('pspace stability w = %i',i);
+    name = sprintf('pspace stability w = %i ext',i);
     title(name);
     
     legend('stable', 'unstable','Location', 'Best')
@@ -91,10 +98,10 @@ for i = 0
             unstableplot(:,3), '.r')
     end
     
-    name = sprintf('pspace stability w = %i',i);
+    name = sprintf('pspace unstable w = %i ext',i);
     title(name);
     
-    legend('stable', 'unstable','Location', 'Best')
+    legend('unstable','Location', 'Best')
     xlabel('p_1')
     ylabel('p_2')
     zlabel('p_3')
@@ -115,7 +122,7 @@ for i = 0
             straightplot(:,3), '.g')
     end
     
-    name = sprintf('pspace straightness w = %i',i);
+    name = sprintf('pspace straight w = %i ext',i);
     title(name);
     
     legend('straight','Location', 'Best')
@@ -139,7 +146,7 @@ for i = 0
             endunstable_splot(:,3), '.b')
     end
     
-    name = sprintf('pspace ends unstable w = %i',i);
+    name = sprintf('pspace ends unstable w = %i ext',i);
     title(name);
     
     legend('unstable p0','stable p0','Location', 'Best')
@@ -163,7 +170,7 @@ for i = 0
             sandwich_splot(:,3), '.b')
     end
     
-    name = sprintf('pspace sandwich p0s w = %i',i);
+    name = sprintf('pspace sandwich p0s w = %i ext',i);
     title(name);
     
     legend('unstable p0','stable p0','Location', 'Best')
