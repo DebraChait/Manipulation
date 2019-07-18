@@ -71,9 +71,11 @@ for i = 0
     xlabel('p_1')
     ylabel('p_2')
     zlabel('p_3')
+    
+    figname = sprintf('pspace_stability_ext_w%i.fig',i)
+    savefig(figname)
     hold off
     
-    % Unstable plot
     figure(2)
     view(3)
     hold on
@@ -89,9 +91,11 @@ for i = 0
     xlabel('p_1')
     ylabel('p_2')
     zlabel('p_3')
+    
+    figname = sprintf('pspace_unstable_ext_w%i.fig',i)
+    savefig(figname)
     hold off
     
-    % Straight plot
     figure(3)
     view(3)
     hold on
@@ -111,32 +115,12 @@ for i = 0
     xlabel('p_1')
     ylabel('p_2')
     zlabel('p_3')
+    
+    figname = sprintf('pspace_straight_ext_w%i.fig',i)
+    savefig(figname)
     hold off
     
-    % Sandwich plot
     figure(4)
-    view(3)
-    hold on
-    if ~isempty(sandwichp0s_u)
-        plot3(sandwich_uplot(:,1), sandwich_uplot(:,2), ...
-            sandwich_uplot(:,3), '.r')
-    end
-    if ~isempty(sandwichp0s_s)
-        plot3(sandwich_splot(:,1), sandwich_splot(:,2), ...
-            sandwich_splot(:,3), '.b')
-    end
-    
-    name = sprintf('pspace sandwich p0s w = %i',i);
-    title(name);
-    
-    legend('unstable p0','stable p0','Location', 'Best')
-    xlabel('p_1')
-    ylabel('p_2')
-    zlabel('p_3')
-    hold off
-    
-    % End unstable plots
-    figure(5)
     view(3)
     hold on
     if ~isempty(endunstablep0s_u)
@@ -155,9 +139,35 @@ for i = 0
     xlabel('p_1')
     ylabel('p_2')
     zlabel('p_3')
+    
+    figname = sprintf('pspace_endunstable_ext_w%i.fig',i)
+    savefig(figname)
     hold off
     
-% end of i forloop    
+    figure(5)
+    view(3)
+    hold on
+    if ~isempty(sandwichp0s_u)
+        plot3(sandwich_uplot(:,1), sandwich_uplot(:,2), ...
+            sandwich_uplot(:,3), '.r')
+    end
+    if ~isempty(sandwichp0s_s)
+        plot3(sandwich_splot(:,1), sandwich_splot(:,2), ...
+            sandwich_splot(:,3), '.b')
+    end
+    
+    name = sprintf('pspace sandwich p0s w = %i',i);
+    title(name);
+    
+    legend('unstable p0','stable p0','Location', 'Best')
+    xlabel('p_1')
+    ylabel('p_2')
+    zlabel('p_3')
+    
+    figname = sprintf('pspace_sandwich_ext_w%i.fig',i)
+    savefig(figname)
+    hold off
+    
 end
 
 end
