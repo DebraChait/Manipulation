@@ -19,7 +19,7 @@ function output = plot_pspace
 
 for i = 120
     
-    sort = sprintf('pspacedata_ext_w%i_sorted',i);
+    sort = sprintf('pspacedata_w%i_sorted',i);
     load(sort)
     
     % Only plot non-zeros entries
@@ -63,9 +63,8 @@ for i = 120
     for row = 1:counte_s
         endunstable_splot(row,:) = endunstablep0s_s(row,:);
     end
-    
-    
-    % Stability plot
+        
+    % Stability/instability plot
     figure(1)
     view(3)
     hold on
@@ -86,7 +85,7 @@ for i = 120
     ylabel('p_2')
     zlabel('p_3')
     
-    figname = sprintf('pspace_stability_ext_w%i.fig',i)
+    figname = sprintf('pspace_stability_w%i.fig',i)
     savefig(figname)
     hold off
     
@@ -106,7 +105,7 @@ for i = 120
     ylabel('p_2')
     zlabel('p_3')
     
-    figname = sprintf('pspace_unstable_ext_w%i.fig',i)
+    figname = sprintf('pspace_unstable_w%i.fig',i)
     savefig(figname)
     hold off
     
@@ -130,7 +129,7 @@ for i = 120
     ylabel('p_2')
     zlabel('p_3')
     
-    figname = sprintf('pspace_straight_ext_w%i.fig',i)
+    figname = sprintf('pspace_straight_w%i.fig',i)
     savefig(figname)
     hold off
     
@@ -154,7 +153,7 @@ for i = 120
     ylabel('p_2')
     zlabel('p_3')
     
-    figname = sprintf('pspace_endunstable_ext_w%i.fig',i)
+    figname = sprintf('pspace_endunstable_w%i.fig',i)
     savefig(figname)
     hold off
     
@@ -178,7 +177,7 @@ for i = 120
     ylabel('p_2')
     zlabel('p_3')
     
-    figname = sprintf('pspace_sandwich_ext_w%i.fig',i)
+    figname = sprintf('pspace_sandwich_w%i.fig',i)
     savefig(figname)
     hold off
     

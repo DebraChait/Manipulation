@@ -40,8 +40,8 @@ for i = [0:10:10, 20:20:120]
         for k = 0:.01:1
             
             m = round((k*100)+1);
-            % p0now = [(k^2)*p0(1), (k^2)*p0(2), k*p0(3)];
-            p0now = [(k^2)*p0(1), (k^2)*p0(2)-w/2*(1 - k^2), k*p0(3)];
+            p0now = [(k^2)*p0(1), (k^2)*p0(2), k*p0(3)];
+            % p0now = [(k^2)*p0(1), (k^2)*p0(2)-w/2*(1 - k^2), k*p0(3)];
             p0paths{m,j} = p0now;
             
         % end of k forloop
@@ -51,7 +51,7 @@ for i = [0:10:10, 20:20:120]
     end
     
     % save data for plotting
-    filename = sprintf('pspacedata_ext_w%i_raw',w);
+    filename = sprintf('pspacedata_w%i_raw',w);
     save(filename,'p0paths');
     
 % end of i forloop

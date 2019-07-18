@@ -18,14 +18,14 @@ params = parameters;
 tf = 1;
 m = 0;
 
-for i = [0:10:10, 20:20:120]
+for i = [0:5:10, 20:20:120]
     
     w = i;
     
 %%%%%    
     
     % Load data
-    filename = sprintf('pspacedata_ext_w%i_raw',w);
+    filename = sprintf('pspacedata_w%i_raw',w);
     load(filename)
     
     % 101 x 3000 arrays
@@ -46,7 +46,7 @@ for i = [0:10:10, 20:20:120]
     
     for col = 1:3000
         
-        fprintf('w = %i, col = %i \n',w,col)
+        fprintf('key: w = %i, col = %i \n',w,col)
         hitunstable = 0;
         
         for row = 1:101
@@ -94,7 +94,7 @@ for i = [0:10:10, 20:20:120]
     % end of col forloop    
     end
     
-    sortkey = sprintf('pspacedata_ext_w%i_key',i);
+    sortkey = sprintf('pspacedata_w%i_key',i);
     save(sortkey)
 
 %%%%
@@ -134,6 +134,7 @@ for i = [0:10:10, 20:20:120]
 %     endunstablep0s = [];
      
     for col = 1:3000
+        fprintf('sort: w = %i, col = %i \n',w,col)
         for row = 1:101
             if stability(row,col) == 0
                 countsb = countsb + 1;
@@ -195,7 +196,7 @@ for i = [0:10:10, 20:20:120]
         
     end
     
-    sort = sprintf('pspacedata_ext_w%i_sorted',i);
+    sort = sprintf('pspacedata_w%i_sorted',i);
     save(sort)
 
 % end of i forloop    
