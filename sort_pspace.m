@@ -1,5 +1,7 @@
-function [unstable,stable,straight,notstraight,sandwichp0s,...
-    endunstablep0s] = sort_pspace
+function [unstable, stable, straight, notstraight, sandwichp0s,...
+    endunstablep0s, sandwichp0s_u, sandwichp0s_s, endunstablep0s_u,...
+    endunstablep0s_s, countu, countsb, countsr, countnsr, countsw,...
+    counte, countsw_u, countsw_s, counte_u, counte_s] = sort_pspace
 
 % Goals:
 % Run IVP on p0s of each path
@@ -19,6 +21,8 @@ m = 0;
 for i = 5
     
     w = i
+    
+%%%%%    
     
     % Load data
     filename = sprintf('pspacedata_ext_w%i_raw',w);
@@ -90,8 +94,10 @@ for i = 5
     % end of col forloop    
     end
     
-    sort = sprintf('pspacedata_ext_w%i_key',i);
-    save(sort)
+    sortkey = sprintf('pspacedata_ext_w%i_key',i);
+    save(sortkey)
+
+%%%%
     
     load('pspacedata_ext_w5_key')
     
@@ -103,32 +109,91 @@ for i = 5
     sandwichp0s = zeros(303000,3);
     endunstablep0s = zeros(303000,3);
     
+    sandwichp0s_u = zeros(303000,3);
+    sandwichp0s_s = zeros(303000,3);
+    endunstablep0s_u = zeros(303000,3);
+    endunstablep0s_s = zeros(303000,3);
+    
+    countu = 0; % unstable
+    countsb = 0; % stable
+    countsr = 0; % straight
+    countnsr =0; % not straight
+    countsw = 0; % sandwich
+    counte = 0; % endunstable
+    
+    countsw_u = 0; % sandwich, unstable
+    countsw_s = 0; % sandwich, stable
+    counte_u = 0; % endunstable, unstable
+    counte_s = 0; % endunstable, stable
+
+%     unstable = [];
+%     stable = [];
+%     straight = [];
+%     notstraight = [];
+%     sandwichp0s = [];
+%     endunstablep0s = [];
+     
     for col = 1:3000
         col
         for row = 1:101
             if stability(row,col) == 0
-                stable = [stable; p0paths{row,col}];
+                countsb = countsb + 1;
+                stable(countsb,:) = p0paths{row,col};
             else
-                unstable = [unstable; p0paths{row,col}];
+                countu = countu + 1;
+                unstable(countu,:) = p0paths{row,col};
             end
             
             if straightness(row,col) == 0
-                notstraight = [notstraight; p0paths{row,col}];
+                countnsr = countnsr + 1;
+                notstraight(countnsr,:) = p0paths{row,col};
             else
-                straight = [straight; p0paths{row,col}];
+                countsr = countsr+ 1;
+                straight(countsr,:) = p0paths{row,col};
             end
         end
         
         if sandwich(1,col) == 1
             for r = 1:101
-                sandwichp0s = [sandwichp0s; p0paths{r,col}];
+                countsw = countsw + 1;
+                sandwichp0s(countsw,:) = p0paths{r,col};
             end
         end
         if endunstable(1,col) == 1
             for r = 1:101
-                endunstablep0s = [endunstablep0s; p0paths{r,col}];
+                counte = counte + 1;
+                endunstablep0s(counte,:) = p0paths{r,col};
             end
         end
+        
+        %%% Differentiate between un/stable in sandwich and endunstable
+        if sandwich(1,col) == 1
+            for r = 1:101
+                if stability(r,col) == 0
+                    % add to sandwichp0s_s
+                    countsw_s = countsw_s + 1;
+                    sandwichp0s_s(countsw_s,:) = p0paths{r,col};
+                else
+                    % add to sandwichp0s_u
+                    countsw_u = countsw_u + 1;
+                    sandwichp0s_u(countsw_u,:) = p0paths{r,col};
+                end
+            end
+        end
+        if endunstable(1,col) == 1
+           for r = 1:101
+              if stability(r,col) == 0
+                  % add to endunstablep0s_s
+                  counte_s = counte_s + 1;
+                  endunstablep0s_s(counte_s,:) = p0paths{r,col};
+              else
+                 % add to endunstablep0s_u 
+                 counte_u = counte_u + 1;
+                 endunstablep0s_u(counte_u,:) = p0paths{r,col};
+              end
+           end
+        end
+        
     end
     
     sort = sprintf('pspacedata_ext_w%i_sorted',i);

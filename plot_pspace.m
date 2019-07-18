@@ -10,7 +10,7 @@ function output = plot_pspace
 % plot
 %help
 
-for i = [5]
+for i = 5
     
 %     unstable = [];
 %     stable = [];
@@ -50,18 +50,61 @@ for i = [5]
 
 sort = sprintf('pspacedata_ext_w%i_sorted',i);
 load(sort)
+
+% Only plot non-zeros entries
+stableplot = zeros(countsb,3);
+unstableplot = zeros(countu,3);
+nstraightplot = zeros(countnsr,3);
+straightplot = zeros(countsr,3);
+sandwich_uplot = zeros(countsw_u,3);
+sandwich_splot = zeros(countsw_s,3);
+endunstable_uplot = zeros(counte_u,3);
+endunstable_splot = zeros(counte_s,3);
+
+for row = 1:countsb
+    stableplot(row,:) = stable(row,:);
+end
+
+for row = 1:countu
+    unstableplot(row,:) = unstable(row,:);
+end
+
+for row = 1:countsr
+    straightplot(row,:) = straight(row,:);
+end
+
+for row = 1:countnsr
+    nstraightplot(row,:) = notstraight(row,:);
+end
+
+for row = 1:countsw_u
+    sandwich_uplot(row,:) = sandwichp0s_u(row,:);
+end
+
+for row = 1:countsw_s
+    sandwich_splot(row,:) = sandwichp0s_s(row,:);
+end
+
+for row = 1:counte_u
+    endunstable_uplot(row,:) = endunstablep0s_u(row,:);
+end
+
+for row = 1:counte_s
+    endunstable_splot(row,:) = endunstablep0s_s(row,:);
+end
+
     
 % Stability plot 
 figure(1)
 view(3)
  hold on
     if ~isempty(stable)
-        plot3(stable(:,1), stable(:,2), ...
-            stable(:,3), '.b')
+        plot3(stableplot(:,1), stableplot(:,2), ...
+            stableplot(:,3), '.b')
     end
     if ~isempty(unstable)
-        plot3(unstable(:,1),unstable(:,2),...
-            unstable(:,3), '.r')
+        plot3(unstableplot(:,1),unstableplot(:,2),...
+            unstableplot(:,3), '.r')
     end
 
     name = sprintf('pspace stability w = %i',i);
@@ -76,19 +119,19 @@ hold off
 figure(2)
 view(3)
  hold on
-    if ~isempty(notstraight)
-        plot3(notstraight(:,1), notstraight(:,2), ...
-            notstraight(:,3), '.b')
-    end
+%     if ~isempty(notstraight)
+%         plot3(notstraightplot(:,1), notstraightplot(:,2), ...
+%             notstraightplot(:,3), '.b')
+%     end
     if ~isempty(straight)
-        plot3(straight(:,1),straight(:,2),...
-            straight(:,3), '.g')
+        plot3(straightplot(:,1),straightplot(:,2),...
+            straightplot(:,3), '.g')
     end
 
     name = sprintf('pspace straightness w = %i',i);
     title(name);
     
-    legend('notstraight', 'straight','Location', 'Best')
+    legend('straight','Location', 'Best')
     xlabel('p_1')
     ylabel('p_2')
     zlabel('p_3')
@@ -97,15 +140,19 @@ hold off
 figure(3)
 view(3)
  hold on
-    if ~isempty(sandwichp0s)
-        plot3(sandwichp0s(:,1), sandwichp0s(:,2), ...
-            sandwichp0s(:,3), '.b')
+    if ~isempty(sandwichp0s_u)
+        plot3(sandwich_uplot(:,1), sandwich_uplot(:,2), ...
+            sandwich_uplot(:,3), '.r')
+    end
+    if ~isempty(sandwichp0s_s)
+        plot3(sandwich_splot(:,1), sandwich_splot(:,2), ...
+            sandwich_splot(:,3), '.b')
     end
 
     name = sprintf('pspace sandwich p0s w = %i',i);
     title(name);
     
-    legend('p0','Location', 'Best')
+    legend('unstable p0','stable p0','Location', 'Best')
     xlabel('p_1')
     ylabel('p_2')
     zlabel('p_3')
@@ -114,15 +161,19 @@ hold off
 figure(4)
 view(3)
  hold on
-    if ~isempty(endunstable)
-        plot3(endunstable(:,1), endunstable(:,2), ...
-            endunstable(:,3), '.b')
+    if ~isempty(endunstablep0s_u)
+        plot3(endunstable_uplot(:,1), endunstable_uplot(:,2), ...
+            endunstable_uplot(:,3), '.r')
+    end
+    if ~isempty(endunstablep0s_s)
+        plot3(endunstable_splot(:,1), endunstable_splot(:,2), ...
+            endunstable_splot(:,3), '.b')
     end
 
     name = sprintf('pspace ends unstable w = %i',i);
     title(name);
     
-    legend('p0s','Location', 'Best')
+    legend('unstable p0','stable p0','Location', 'Best')
     xlabel('p_1')
     ylabel('p_2')
     zlabel('p_3')
