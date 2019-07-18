@@ -7,9 +7,9 @@ function p0paths = save_pspace_raw
 tic
 
 % set random weights
-for i = [0:5:10, 20:20:120]
+for i = [0:10:10, 20:20:120]
     
-    w = i
+    w = i;
     
     % Initialize cell to store p0 paths
     p0paths = cell(101,3000);
@@ -34,7 +34,7 @@ for i = [0:5:10, 20:20:120]
     z=zrange*z./n;
     
     for j = 1:3000
-                
+        fprintf('w = %i, j = %i \n', w, j)        
         p0 = [x(j), y(j), z(j)];
         
         for k = 0:.01:1

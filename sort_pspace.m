@@ -18,9 +18,9 @@ params = parameters;
 tf = 1;
 m = 0;
 
-for i = 5
+for i = [0:10:10, 20:20:120]
     
-    w = i
+    w = i;
     
 %%%%%    
     
@@ -46,7 +46,7 @@ for i = 5
     
     for col = 1:3000
         
-        col
+        fprintf('w = %i, col = %i \n',w,col)
         hitunstable = 0;
         
         for row = 1:101
@@ -99,7 +99,7 @@ for i = 5
 
 %%%%
     
-    load('pspacedata_ext_w5_key')
+    % load('pspacedata_ext_w5_key')
     
     % Initialize to preallocate storage, runs faster
     unstable = zeros(303000,3);
@@ -134,7 +134,6 @@ for i = 5
 %     endunstablep0s = [];
      
     for col = 1:3000
-        col
         for row = 1:101
             if stability(row,col) == 0
                 countsb = countsb + 1;
