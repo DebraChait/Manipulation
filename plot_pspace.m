@@ -83,88 +83,97 @@ for i = 0
     savefig(figname)
     hold off
     
-%     figure(2)
-%     view(3)
-%     hold on
-%     if ~isempty(unstable)
-%         plot3(unstableplot(:,1),unstableplot(:,2),...
-%             unstableplot(:,3), '.r')
-%     end
-%     
-%     name = sprintf('pspace stability w = %i',i);
-%     title(name);
-%     
-%     legend('stable', 'unstable','Location', 'Best')
-%     xlabel('p_1')
-%     ylabel('p_2')
-%     zlabel('p_3')
-%     
-%     figname = sprintf('PspaceUnstable_ext_w%i.fig')
-%     savefig(figname)
-%     hold off
-%     
-%     figure(3)
-%     view(3)
-%     hold on
-%     %     if ~isempty(notstraight)
-%     %         plot3(notstraightplot(:,1), notstraightplot(:,2), ...
-%     %             notstraightplot(:,3), '.b')
-%     %     end
-%     if ~isempty(straight)
-%         plot3(straightplot(:,1),straightplot(:,2),...
-%             straightplot(:,3), '.g')
-%     end
-%     
-%     name = sprintf('pspace straightness w = %i',i);
-%     title(name);
-%     
-%     legend('straight','Location', 'Best')
-%     xlabel('p_1')
-%     ylabel('p_2')
-%     zlabel('p_3')
-%     hold off
-%     
-%     figure(4)
-%     view(3)
-%     hold on
-%     if ~isempty(endunstablep0s_u)
-%         plot3(endunstable_uplot(:,1), endunstable_uplot(:,2), ...
-%             endunstable_uplot(:,3), '.r')
-%     end
-%     if ~isempty(endunstablep0s_s)
-%         plot3(endunstable_splot(:,1), endunstable_splot(:,2), ...
-%             endunstable_splot(:,3), '.b')
-%     end
-%     
-%     name = sprintf('pspace ends unstable w = %i',i);
-%     title(name);
-%     
-%     legend('unstable p0','stable p0','Location', 'Best')
-%     xlabel('p_1')
-%     ylabel('p_2')
-%     zlabel('p_3')
-%     hold off
-%     
-%     figure(5)
-%     view(3)
-%     hold on
-%     if ~isempty(sandwichp0s_u)
-%         plot3(sandwich_uplot(:,1), sandwich_uplot(:,2), ...
-%             sandwich_uplot(:,3), '.r')
-%     end
-%     if ~isempty(sandwichp0s_s)
-%         plot3(sandwich_splot(:,1), sandwich_splot(:,2), ...
-%             sandwich_splot(:,3), '.b')
-%     end
-%     
-%     name = sprintf('pspace sandwich p0s w = %i',i);
-%     title(name);
-%     
-%     legend('unstable p0','stable p0','Location', 'Best')
-%     xlabel('p_1')
-%     ylabel('p_2')
-%     zlabel('p_3')
-%     hold off
+    figure(2)
+    view(3)
+    hold on
+    if ~isempty(unstable)
+        plot3(unstableplot(:,1),unstableplot(:,2),...
+            unstableplot(:,3), '.r')
+    end
+    
+    name = sprintf('pspace stability w = %i',i);
+    title(name);
+    
+    legend('stable', 'unstable','Location', 'Best')
+    xlabel('p_1')
+    ylabel('p_2')
+    zlabel('p_3')
+    
+    figname = sprintf('pspace_unstable_ext_w%i.fig',i)
+    savefig(figname)
+    hold off
+    
+    figure(3)
+    view(3)
+    hold on
+    %     if ~isempty(notstraight)
+    %         plot3(notstraightplot(:,1), notstraightplot(:,2), ...
+    %             notstraightplot(:,3), '.b')
+    %     end
+    if ~isempty(straight)
+        plot3(straightplot(:,1),straightplot(:,2),...
+            straightplot(:,3), '.g')
+    end
+    
+    name = sprintf('pspace straightness w = %i',i);
+    title(name);
+    
+    legend('straight','Location', 'Best')
+    xlabel('p_1')
+    ylabel('p_2')
+    zlabel('p_3')
+    
+    figname = sprintf('pspace_straight_ext_w%i.fig',i)
+    savefig(figname)
+    hold off
+    
+    figure(4)
+    view(3)
+    hold on
+    if ~isempty(endunstablep0s_u)
+        plot3(endunstable_uplot(:,1), endunstable_uplot(:,2), ...
+            endunstable_uplot(:,3), '.r')
+    end
+    if ~isempty(endunstablep0s_s)
+        plot3(endunstable_splot(:,1), endunstable_splot(:,2), ...
+            endunstable_splot(:,3), '.b')
+    end
+    
+    name = sprintf('pspace ends unstable w = %i',i);
+    title(name);
+    
+    legend('unstable p0','stable p0','Location', 'Best')
+    xlabel('p_1')
+    ylabel('p_2')
+    zlabel('p_3')
+    
+    figname = sprintf('pspace_endunstable_ext_w%i.fig',i)
+    savefig(figname)
+    hold off
+    
+    figure(5)
+    view(3)
+    hold on
+    if ~isempty(sandwichp0s_u)
+        plot3(sandwich_uplot(:,1), sandwich_uplot(:,2), ...
+            sandwich_uplot(:,3), '.r')
+    end
+    if ~isempty(sandwichp0s_s)
+        plot3(sandwich_splot(:,1), sandwich_splot(:,2), ...
+            sandwich_splot(:,3), '.b')
+    end
+    
+    name = sprintf('pspace sandwich p0s w = %i',i);
+    title(name);
+    
+    legend('unstable p0','stable p0','Location', 'Best')
+    xlabel('p_1')
+    ylabel('p_2')
+    zlabel('p_3')
+    
+    figname = sprintf('pspace_sandwich_ext_w%i.fig',i)
+    savefig(figname)
+    hold off
     
 end
 
