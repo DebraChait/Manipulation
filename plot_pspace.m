@@ -4,9 +4,11 @@ function output = plot_pspace
 % stable/unstable in different colors.
 % Make sandwiches red
 
-for i = 0
+% sandwich at w = 5,10
+
+for i = 120
     
-    sort = sprintf('pspacedata_ext_w%i_sorted',i);
+    sort = sprintf('pspacedata_w%i_sorted',i);
     load(sort)
     
     % Only plot non-zeros entries
@@ -72,7 +74,7 @@ for i = 0
     ylabel('p_2')
     zlabel('p_3')
     
-    figname = sprintf('pspace_stability_ext_w%i.fig',i)
+    figname = sprintf('pspace_stability_w%i.fig',i)
     savefig(figname)
     hold off
     
@@ -84,15 +86,15 @@ for i = 0
             unstableplot(:,3), '.r')
     end
     
-    name = sprintf('pspace stability w = %i',i);
+    name = sprintf('pspace unstable w = %i',i);
     title(name);
     
-    legend('stable', 'unstable','Location', 'Best')
+    legend('unstable','Location', 'Best')
     xlabel('p_1')
     ylabel('p_2')
     zlabel('p_3')
     
-    figname = sprintf('pspace_unstable_ext_w%i.fig',i)
+    figname = sprintf('pspace_unstable_w%i.fig',i)
     savefig(figname)
     hold off
     
@@ -108,7 +110,7 @@ for i = 0
             straightplot(:,3), '.g')
     end
     
-    name = sprintf('pspace straightness w = %i',i);
+    name = sprintf('pspace straight w = %i',i);
     title(name);
     
     legend('straight','Location', 'Best')
@@ -116,7 +118,7 @@ for i = 0
     ylabel('p_2')
     zlabel('p_3')
     
-    figname = sprintf('pspace_straight_ext_w%i.fig',i)
+    figname = sprintf('pspace_straight_w%i.fig',i)
     savefig(figname)
     hold off
     
@@ -140,7 +142,7 @@ for i = 0
     ylabel('p_2')
     zlabel('p_3')
     
-    figname = sprintf('pspace_endunstable_ext_w%i.fig',i)
+    figname = sprintf('pspace_endunstable_w%i.fig',i)
     savefig(figname)
     hold off
     
@@ -164,7 +166,7 @@ for i = 0
     ylabel('p_2')
     zlabel('p_3')
     
-    figname = sprintf('pspace_sandwich_ext_w%i.fig',i)
+    figname = sprintf('pspace_sandwich_w%i.fig',i)
     savefig(figname)
     hold off
     
