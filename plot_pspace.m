@@ -4,9 +4,11 @@ function output = plot_pspace
 % stable/unstable in different colors.
 % Make sandwiches red
 
-% sandwich at w = 5,10
+% Sandwich notes inextensible
+% w = 5, 1 path
+% w = 10, 1 path
 
-for i = 120
+for i = 20
     
     sort = sprintf('pspacedata_w%i_sorted',i);
     load(sort)
@@ -74,8 +76,8 @@ for i = 120
     ylabel('p_2')
     zlabel('p_3')
     
-    figname = sprintf('pspace_stability_w%i.fig',i)
-    savefig(figname)
+    figname1 = sprintf('pspace_stability_w%i.fig',i)
+    savefig(figname1)
     hold off
     
     figure(2)
@@ -94,8 +96,8 @@ for i = 120
     ylabel('p_2')
     zlabel('p_3')
     
-    figname = sprintf('pspace_unstable_w%i.fig',i)
-    savefig(figname)
+    figname2 = sprintf('pspace_unstable_w%i.fig',i)
+    savefig(figname2)
     hold off
     
     figure(3)
@@ -118,8 +120,8 @@ for i = 120
     ylabel('p_2')
     zlabel('p_3')
     
-    figname = sprintf('pspace_straight_w%i.fig',i)
-    savefig(figname)
+    figname3 = sprintf('pspace_straight_w%i.fig',i)
+    savefig(figname3)
     hold off
     
     figure(4)
@@ -142,8 +144,8 @@ for i = 120
     ylabel('p_2')
     zlabel('p_3')
     
-    figname = sprintf('pspace_endunstable_w%i.fig',i)
-    savefig(figname)
+    figname4 = sprintf('pspace_endunstable_w%i.fig',i)
+    savefig(figname4)
     hold off
     
     figure(5)
@@ -166,8 +168,8 @@ for i = 120
     ylabel('p_2')
     zlabel('p_3')
     
-    figname = sprintf('pspace_sandwich_w%i.fig',i)
-    savefig(figname)
+    figname5 = sprintf('pspace_sandwich_w%i.fig',i)
+    savefig(figname5)
     hold off
     
 end
