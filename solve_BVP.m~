@@ -18,14 +18,16 @@ output_IVP = [];
 % We need the try/catch so that if we encounter a line search fail,
 % solve_BVP still outputs output_BVP.catch
 try
-
+disp('in BVP')
     % Boundary value problem loop
     while i < params.nmax
-
+        i
+        disp('in while loop')
         % Iterate i
         i = i+1;
         % Solve IVP
-        output_IVP = solve_IVP(x0,p0,tf,params,m,w);
+        output_IVP = solve_IVP(x0,p0,tf,params,m,w)
+        disp('solved IVP')
         % Compute error between current and desired value of x(tf)
         output_IVP.eta = ...
             [output_IVP.x(end,1)-xf(1); % For component x1
@@ -38,18 +40,19 @@ try
         % fprintf('iteration: %.0f    error: %.10f \n',i,output_IVP.err)
 
         % Plot solution, pause to see starting shape
-        if m == 1 
-            plot_function(output_IVP,xf)
-        end
+        plot_function(output_IVP,xf)
 %         if m==1
 %             pause(1)
 %         end
 
         % If error is minute, we've found a solution
         if output_IVP.err <= params.tol
+            disp('sol found')
             output_BVP = output_IVP;
             output_BVP.p0 = p0;
             break
+        else
+            disp('error too large for sol')
         end
 
         % Compute search direction for p0
@@ -63,11 +66,12 @@ try
 
         % Enforce maximum step size
         if norm(dp0) > params.maxstep
+            disp('checking step size')
             dp0 = dp0/norm(dp0)*params.maxstep;
         end
 
         % Update p0 basic for a better guess
-         p0 = p0 + dp0';
+         p0 = p0 + dp0'
 
         % Use line search to find step size that ensures error decreases
 %         step = line_search(x0,p0,xf,dp0,tf,output_IVP.err,params,m,w);
@@ -82,11 +86,10 @@ try
 %         end
         
 
-        if ~isempty(output_IVP.tconj)
+        if ~isempty(output_BVP.tconj)
             fprintf('found a conjugate point at i = %i',i)
-            disp(output_IVP.tconj)
+            disp(output_BVP.tconj)
         end
-        
     end
     
 
@@ -96,6 +99,7 @@ try
         error('BVP solver failed')
         
     else
+        disp('no error')
         output_BVP.catch = 'no error';
     end
 
