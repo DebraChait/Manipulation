@@ -118,4 +118,8 @@
 % then talk about algorithms of straightening
 % Think about videos: Map out slices of pspace, keep paths with 
 % stable/unstable/stable
-
+%
+%% Meeting 7/19/19
+% We would have to completely map out p space to use this method 
+% Show sandwiches and full plot w everthing overlayed, w everything separate
+% INSTEAD we could use method in physical space to cut and rescale
